@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Games - Cyberpunk Gaming Portal | Play Free Online Games</title>
+    <meta name="description" content="Experience the ultimate cyberpunk gaming experience with Happy Games. Play free online games including action, puzzle, strategy, adventure, and more.">
+    <link rel="canonical" href="https://happygame.help/">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Happy Games</div>
+            <button class="mobile-menu-btn">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active" data-i18n="nav.home">Home</a></li>
+                    <li><a href="top-games.html" data-i18n="nav.topGames">Top Games</a></li>
+                    <li><a href="new-games.html" data-i18n="nav.newGames">New Games</a></li>
+                    <li><a href="categories.html" data-i18n="nav.categories">Categories</a></li>
+                    <li><a href="favorites.html" data-i18n="nav.myFavorites">My Favorites</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1 data-i18n="hero.welcome">Welcome to Happy Games</h1>
+            <div class="hero-actions">
+                <a href="#games" class="cta-button" data-i18n="hero.cta">Start Playing Now</a>
+            </div>
+            <div class="search-container hero-search">
+                <input type="text" id="game-search" class="search-input" placeholder="Search games..." data-i18n="[placeholder]home.search_games">
+                <button id="search-btn" class="search-button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Games</h2>
+            <ul class="category-list">
+                <li><a href="category/action.html"><span class="icon">🎮</span><span data-i18n="categories.action">Action Games</span></a></li>
+                <li><a href="category/puzzle.html"><span class="icon">🧩</span><span data-i18n="categories.puzzle">Puzzle Games</span></a></li>
+                <li><a href="category/strategy.html"><span class="icon">⚔️</span><span data-i18n="categories.strategy">Strategy Games</span></a></li>
+                <li><a href="category/racing.html"><span class="icon">🏎️</span><span data-i18n="categories.racing">Racing Games</span></a></li>
+                <li><a href="category/brain.html"><span class="icon">🧠</span><span data-i18n="categories.brain">Brain Teasers</span></a></li>
+                <li><a href="category/sports.html"><span class="icon">🏆</span><span data-i18n="categories.sports">Sports Games</span></a></li>
+                <li><a href="category/tower-defense.html"><span class="icon">🏰</span><span data-i18n="categories.towerDefense">Tower Defense Games</span></a></li>
+                <li class="theme-divider"><hr></li>
+                <li><a href="theme/cyberpunk.html"><span class="icon">🌌</span><span data-i18n="themes.cyberpunk">Cyberpunk</span></a></li>
+                <li><a href="theme/scifi.html"><span class="icon">🤖</span><span data-i18n="themes.scifi">Sci-Fi</span></a></li>
+                <li><a href="theme/fantasy.html"><span class="icon">🧙</span><span data-i18n="themes.fantasy">Fantasy</span></a></li>
+                <li><a href="theme/survival.html"><span class="icon">🧟</span><span data-i18n="themes.survival">Survival</span></a></li>
+                <li><a href="theme/adventure.html"><span class="icon">🌍</span><span data-i18n="themes.adventure">Adventure</span></a></li>
+            </ul>
+        </aside>
+
+        <main id="games">
+            <!-- Popular Games Section -->
+            <section class="game-section" id="category-popular">
+                <div class="section-header">
+                    <h2 data-i18n="sections.popular">Popular Games</h2>
+                    <a href="popular-games.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="popular-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+                <!-- 添加瀑布流布局容器 -->
+                <div id="games-waterfall"></div>
+            </section>
+            
+            <!-- Action Games Section -->
+            <section class="game-section" id="category-action">
+                <div class="section-header">
+                    <h2 data-i18n="categories.action">Action Games</h2>
+                    <a href="category/action.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="action-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- Puzzle Games Section -->
+            <section class="game-section" id="category-puzzle">
+                <div class="section-header">
+                    <h2 data-i18n="categories.puzzle">Puzzle Games</h2>
+                    <a href="category/puzzle.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="puzzle-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- Racing Games Section -->
+            <section class="game-section" id="category-racing">
+                <div class="section-header">
+                    <h2 data-i18n="categories.racing">Racing Games</h2>
+                    <a href="category/racing.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="racing-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- Strategy Games Section -->
+            <section class="game-section" id="category-strategy">
+                <div class="section-header">
+                    <h2 data-i18n="categories.strategy">Strategy Games</h2>
+                    <a href="category/strategy.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="strategy-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- Brain Teasers Section -->
+            <section class="game-section" id="category-brain">
+                <div class="section-header">
+                    <h2 data-i18n="categories.brain">Brain Teasers</h2>
+                    <a href="category/brain.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="brain-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- Sports Games Section -->
+            <section class="game-section" id="category-sports">
+                <div class="section-header">
+                    <h2 data-i18n="categories.sports">Sports Games</h2>
+                    <a href="category/sports.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="sports-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- Tower Defense Games Section -->
+            <section class="game-section" id="category-tower-defense">
+                <div class="section-header">
+                    <h2 data-i18n="categories.towerDefense">Tower Defense Games</h2>
+                    <a href="category/tower-defense.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="tower-defense-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 添加主题部分 -->
+    <div class="container">
+        <main>
+            <!-- Cyberpunk Theme Section -->
+            <section class="game-section" id="theme-cyberpunk">
+                <div class="section-header">
+                    <h2 data-i18n="themes.cyberpunk">Cyberpunk</h2>
+                    <a href="theme/cyberpunk.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="cyberpunk-themed-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- Sci-Fi Theme Section -->
+            <section class="game-section" id="theme-scifi">
+                <div class="section-header">
+                    <h2 data-i18n="themes.scifi">Sci-Fi</h2>
+                    <a href="theme/scifi.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="scifi-themed-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- Fantasy Theme Section -->
+            <section class="game-section" id="theme-fantasy">
+                <div class="section-header">
+                    <h2 data-i18n="themes.fantasy">Fantasy</h2>
+                    <a href="theme/fantasy.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="fantasy-themed-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- Survival Theme Section -->
+            <section class="game-section" id="theme-survival">
+                <div class="section-header">
+                    <h2 data-i18n="themes.survival">Survival</h2>
+                    <a href="theme/survival.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="survival-themed-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- Adventure Theme Section -->
+            <section class="game-section" id="theme-adventure">
+                <div class="section-header">
+                    <h2 data-i18n="themes.adventure">Adventure</h2>
+                    <a href="theme/adventure.html" class="see-all" data-i18n="sections.seeAll">See All</a>
+                </div>
+                <div class="games-grid" id="adventure-themed-games">
+                    <!-- 游戏卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3 data-i18n="footer.about">About Happy Games</h3>
+                <p data-i18n="footer.aboutDesc">Free online gaming platform for endless fun!</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">IG</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.quickLinks">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="top-games.html" data-i18n="nav.topGames">Top Games</a></li>
+                    <li><a href="new-games.html" data-i18n="nav.newGames">New Games</a></li>
+                    <li><a href="contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.categories">Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="category/action.html" data-i18n="categories.action">Action Games</a></li>
+                    <li><a href="category/puzzle.html" data-i18n="categories.puzzle">Puzzle Games</a></li>
+                    <li><a href="category/strategy.html" data-i18n="categories.strategy">Strategy Games</a></li>
+                    <li><a href="category/racing.html" data-i18n="categories.racing">Racing Games</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.legal">Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html" data-i18n="footer.privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html" data-i18n="footer.termsOfService">Terms of Service</a></li>
+                    <li><a href="cookie-policy.html" data-i18n="footer.cookiePolicy">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Happy Games. <span data-i18n="footer.copyright">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <div class="bookmark-toast" id="bookmark-message">
+        <span data-i18n="gameDetails.bookmarkAdded">Press {key} to add this page to your bookmarks!</span>
+    </div>
+
+    <script src="js/games-data.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/homepage-generator.js"></script>
+    <script src="script.js"></script>
+    <script src="js/waterfall-grid.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化瀑布流布局
+            WaterfallGrid.init('games-waterfall', WaterfallGrid.getWaterfallGames);
+            
+            // 搜索功能
+            const searchInput = document.getElementById('game-search');
+            const searchBtn = document.getElementById('search-btn');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                if (searchTerm === '') {
+                    // 如果搜索词为空，重新加载所有游戏
+                    document.getElementById('games-waterfall').innerHTML = '';
+                    WaterfallGrid.init('games-waterfall', WaterfallGrid.getWaterfallGames);
+                } else {
+                    // 过滤游戏
+                    const filteredGames = gamesData.filter(game => 
+                        game.title.toLowerCase().includes(searchTerm) || 
+                        (game.description && game.description.toLowerCase().includes(searchTerm)) ||
+                        (game.descriptions && game.descriptions.zh && game.descriptions.zh.toLowerCase().includes(searchTerm)) ||
+                        (game.descriptions && game.descriptions.en && game.descriptions.en.toLowerCase().includes(searchTerm)) ||
+                        (game.category && game.category.some(cat => cat.toLowerCase().includes(searchTerm))) ||
+                        (game.theme && game.theme.some(theme => theme.toLowerCase().includes(searchTerm))) ||
+                        (game.tags && game.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
+                    );
+                    
+                    // 显示过滤后的游戏
+                    document.getElementById('games-waterfall').innerHTML = '';
+                    if (filteredGames.length > 0) {
+                        WaterfallGrid.init('games-waterfall', (page, count) => {
+                            const start = page * count;
+                            return filteredGames.slice(start, start + count);
+                        });
+                    } else {
+                        document.getElementById('games-waterfall').innerHTML = 
+                            '<div class="no-results">No games found matching your search.</div>';
+                    }
+                }
+            }
+            
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

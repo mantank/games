@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Details - Happy Games</title>
+    <meta name="description" content="Play free online games on Happy Games - the ultimate cyberpunk gaming portal.">
+    <link rel="canonical" href="https://happygame.help/game-detail.html">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Happy Games</div>
+            <button class="mobile-menu-btn">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="top-games.html" data-i18n="nav.topGames">Top Games</a></li>
+                    <li><a href="new-games.html" data-i18n="nav.newGames">New Games</a></li>
+                    <li><a href="categories.html" data-i18n="nav.categories">Categories</a></li>
+                    <li><a href="favorites.html" data-i18n="nav.myFavorites">My Favorites</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container game-page-container">
+        <div class="back-navigation">
+            <a href="javascript:history.back()" class="back-button">
+                <i class="fas fa-arrow-left"></i> <span data-i18n="gameDetails.backToGames">Back to Games</span>
+            </a>
+        </div>
+
+        <div class="game-details-container">
+            <h1 class="game-title" id="game-title">Loading Game...</h1>
+            
+            <div class="game-meta">
+                <div class="meta-item" id="game-category">
+                    <i class="fas fa-gamepad"></i> <span>Category: </span><span id="category-value">Loading...</span>
+                </div>
+                <div class="meta-item" id="game-theme">
+                    <i class="fas fa-paint-brush"></i> <span>Theme: </span><span id="theme-value">Loading...</span>
+                </div>
+            </div>
+
+            <div class="game-controls">
+                <button id="fullscreen-btn" class="game-control-btn">
+                    <i class="fas fa-expand"></i> <span data-i18n="gameDetails.fullscreen">Fullscreen</span>
+                </button>
+                <button id="favorite-btn" class="game-control-btn">
+                    <i class="far fa-heart"></i> <span data-i18n="gameDetails.addToFavorites">Add to Favorites</span>
+                </button>
+                <button id="share-btn" class="game-control-btn">
+                    <i class="fas fa-share-alt"></i> <span data-i18n="gameDetails.share">Share</span>
+                </button>
+            </div>
+
+            <div id="game-iframe-container" class="game-iframe-container">
+                <!-- Game iframe will be loaded here -->
+                <div class="game-loader" id="game-loader">
+                    <div class="spinner"></div>
+                    <span data-i18n="gameDetails.loading">Loading Game...</span>
+                </div>
+            </div>
+
+            <div class="game-description">
+                <h3 data-i18n="gameDetails.aboutGame">About This Game</h3>
+                <p id="game-description-text">Loading game description...</p>
+            </div>
+
+            <div class="game-instructions">
+                <h3 data-i18n="gameDetails.howToPlay">How to Play</h3>
+                <p id="game-instructions-text" data-i18n="gameDetails.defaultInstructions">
+                    Use your keyboard, mouse, or touch controls to play this game. Specific controls will be shown in-game.
+                </p>
+            </div>
+        </div>
+
+        <section class="related-games-section">
+            <h2 data-i18n="gameDetails.relatedGames">Related Games</h2>
+            <div class="games-grid" id="related-games">
+                <!-- Related games will be loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3 data-i18n="footer.about">About Happy Games</h3>
+                <p data-i18n="footer.aboutDesc">Free online gaming platform for endless fun!</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">IG</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.quickLinks">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="top-games.html" data-i18n="nav.topGames">Top Games</a></li>
+                    <li><a href="new-games.html" data-i18n="nav.newGames">New Games</a></li>
+                    <li><a href="contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.categories">Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="category/action.html" data-i18n="categories.action">Action Games</a></li>
+                    <li><a href="category/puzzle.html" data-i18n="categories.puzzle">Puzzle Games</a></li>
+                    <li><a href="category/strategy.html" data-i18n="categories.strategy">Strategy Games</a></li>
+                    <li><a href="category/racing.html" data-i18n="categories.racing">Racing Games</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.legal">Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html" data-i18n="footer.privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html" data-i18n="footer.termsOfService">Terms of Service</a></li>
+                    <li><a href="cookie-policy.html" data-i18n="footer.cookiePolicy">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Happy Games. <span data-i18n="footer.copyright">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <div class="share-overlay" id="share-overlay">
+        <div class="share-modal">
+            <h3 data-i18n="gameDetails.shareGame">Share This Game</h3>
+            <div class="share-options">
+                <a href="#" class="facebook-share"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="#" class="twitter-share"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#" class="whatsapp-share"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="#" class="copy-link" id="copy-link"><i class="fas fa-link"></i> Copy Link</a>
+            </div>
+            <button class="close-share" id="close-share"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast-message">
+        <span id="toast-text"></span>
+    </div>
+
+    <script src="js/games-data.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/game-iframe.js"></script>
+    <script src="js/waterfall-grid.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Game detail page initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            // Parse URL parameters to get game ID
+            const urlParams = new URLSearchParams(window.location.search);
+            const gameId = urlParams.get('id');
+            
+            if (gameId) {
+                loadGameDetails(gameId);
+            } else {
+                showErrorMessage("Game not found");
+                document.getElementById('game-title').textContent = "Game Not Found";
+                document.getElementById('game-description-text').textContent = "The requested game could not be found.";
+            }
+            
+            // Setup share functionality
+            document.getElementById('share-btn').addEventListener('click', () => {
+                const game = getGameById(gameId);
+                if (game && window.WaterfallGrid && window.WaterfallGrid.openShareModal) {
+                    window.WaterfallGrid.openShareModal(game);
+                } else {
+                    document.getElementById('share-overlay').classList.add('active');
+                }
+            });
+            
+            document.getElementById('close-share').addEventListener('click', () => {
+                document.getElementById('share-overlay').classList.remove('active');
+            });
+            
+            document.getElementById('copy-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(window.location.href)
+                    .then(() => {
+                        showToast("Link copied to clipboard!");
+                    })
+                    .catch(err => {
+                        showToast("Failed to copy link: " + err);
+                    });
+            });
+        });
+        
+        function loadGameDetails(gameId) {
+            // Get game data from games-data.js
+            const game = getGameById(gameId);
+            
+            if (game) {
+                // Update page title
+                document.title = `${game.title} - Happy Games`;
+                
+                // Update game details
+                document.getElementById('game-title').textContent = game.title;
+                
+                // Get description based on current language
+                let description = game.description; // Default description
+                if (game.descriptions && window.I18n) {
+                    const currentLang = window.I18n.getCurrentLanguage();
+                    if (game.descriptions[currentLang]) {
+                        description = game.descriptions[currentLang];
+                    } else if (game.descriptions.en) {
+                        description = game.descriptions.en;
+                    }
+                }
+                document.getElementById('game-description-text').textContent = description;
+                
+                // Update meta information
+                if (game.category && game.category.length > 0) {
+                    document.getElementById('category-value').textContent = game.category.map(cat => 
+                        gameCategories[cat] || cat
+                    ).join(', ');
+                }
+                
+                if (game.theme && game.theme.length > 0) {
+                    document.getElementById('theme-value').textContent = game.theme.map(theme => 
+                        gameThemes[theme] || theme
+                    ).join(', ');
+                }
+                
+                // Setup favorite button
+                const favoriteBtn = document.getElementById('favorite-btn');
+                if (isFavorite(gameId)) {
+                    favoriteBtn.innerHTML = '<i class="fas fa-heart"></i> <span data-i18n="gameDetails.removeFromFavorites">Remove from Favorites</span>';
+                    favoriteBtn.classList.add('active');
+                }
+                
+                favoriteBtn.addEventListener('click', () => {
+                    toggleFavorite(game);
+                    if (isFavorite(gameId)) {
+                        favoriteBtn.innerHTML = '<i class="fas fa-heart"></i> <span data-i18n="gameDetails.removeFromFavorites">Remove from Favorites</span>';
+                        favoriteBtn.classList.add('active');
+                        showToast(I18n.getTranslation('favorites.added') || "Added to favorites!");
+                    } else {
+                        favoriteBtn.innerHTML = '<i class="far fa-heart"></i> <span data-i18n="gameDetails.addToFavorites">Add to Favorites</span>';
+                        favoriteBtn.classList.remove('active');
+                        showToast(I18n.getTranslation('favorites.removed') || "Removed from favorites!");
+                    }
+                    
+                    // Update translations
+                    if (window.I18n && window.I18n.updateI18n) {
+                        window.I18n.updateI18n();
+                    }
+                });
+                
+                // Load game iframe
+                loadGameIframe(game);
+                
+                // Load related games
+                loadRelatedGames(gameId);
+            } else {
+                showErrorMessage("Game not found");
+            }
+        }
+        
+        function showErrorMessage(message) {
+            showToast(message);
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast-message');
+            document.getElementById('toast-text').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        function loadRelatedGames(gameId) {
+            const relatedGames = getRelatedGames(gameId);
+            const container = document.getElementById('related-games');
+            
+            if (relatedGames.length === 0) {
+                container.innerHTML = '<p class="no-games-message">No related games found.</p>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            relatedGames.forEach(game => {
+                const gameCard = createGameCard(game);
+                container.appendChild(gameCard);
+            });
+        }
+        
+        function createGameCard(game) {
+            const gameCard = document.createElement('div');
+            gameCard.className = 'game-card';
+            
+            // Get description based on current language
+            let description = game.description; // Default description
+            if (game.descriptions && window.I18n) {
+                const currentLang = window.I18n.getCurrentLanguage();
+                if (game.descriptions[currentLang]) {
+                    description = game.descriptions[currentLang];
+                } else if (game.descriptions.en) {
+                    description = game.descriptions.en;
+                }
+            }
+            
+            gameCard.innerHTML = `
+                <div class="game-thumb-container">
+                    <img src="${game.thumbnail}" alt="${game.title}" class="game-thumb">
+                    <div class="play-now-overlay">
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">${game.title}</h3>
+                    <p class="game-description">${description.substring(0, 80)}${description.length > 80 ? '...' : ''}</p>
+                </div>
+            `;
+            
+            gameCard.addEventListener('click', () => {
+                window.location.href = `game-detail.html?id=${game.id}`;
+            });
+            
+            return gameCard;
+        }
+    </script>
+</body>
+</html> 

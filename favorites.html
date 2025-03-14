@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorite Games - Happy Games</title>
+    <meta name="description" content="View and manage your favorite games on Happy Games.">
+    <link rel="canonical" href="https://happygame.help/favorites.html">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Happy Games</div>
+            <button class="mobile-menu-btn">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="top-games.html" data-i18n="nav.topGames">Top Games</a></li>
+                    <li><a href="new-games.html" data-i18n="nav.newGames">New Games</a></li>
+                    <li><a href="categories.html" data-i18n="nav.categories">Categories</a></li>
+                    <li><a href="favorites.html" class="active" data-i18n="nav.myFavorites">My Favorites</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Games</h2>
+            <ul class="category-list">
+                <li><a href="category/action.html"><span class="icon">🎮</span><span data-i18n="categories.action">Action Games</span></a></li>
+                <li><a href="category/puzzle.html"><span class="icon">🧩</span><span data-i18n="categories.puzzle">Puzzle Games</span></a></li>
+                <li><a href="category/strategy.html"><span class="icon">⚔️</span><span data-i18n="categories.strategy">Strategy Games</span></a></li>
+                <li><a href="category/racing.html"><span class="icon">🏎️</span><span data-i18n="categories.racing">Racing Games</span></a></li>
+                <li><a href="category/brain.html"><span class="icon">🧠</span><span data-i18n="categories.brain">Brain Teasers</span></a></li>
+                <li><a href="category/sports.html"><span class="icon">🏆</span><span data-i18n="categories.sports">Sports Games</span></a></li>
+                <li><a href="category/tower-defense.html"><span class="icon">🏰</span><span data-i18n="categories.towerDefense">Tower Defense Games</span></a></li>
+                <li class="theme-divider"><hr></li>
+                <li><a href="theme/cyberpunk.html"><span class="icon">🌌</span><span data-i18n="themes.cyberpunk">Cyberpunk</span></a></li>
+                <li><a href="theme/scifi.html"><span class="icon">🤖</span><span data-i18n="themes.scifi">Sci-Fi</span></a></li>
+                <li><a href="theme/fantasy.html"><span class="icon">🧙</span><span data-i18n="themes.fantasy">Fantasy</span></a></li>
+                <li><a href="theme/survival.html"><span class="icon">🧟</span><span data-i18n="themes.survival">Survival</span></a></li>
+                <li><a href="theme/adventure.html"><span class="icon">🌍</span><span data-i18n="themes.adventure">Adventure</span></a></li>
+            </ul>
+        </aside>
+
+        <main>
+            <section class="favorites-section">
+                <div class="section-header">
+                    <h1 data-i18n="favorites.title">My Favorite Games</h1>
+                </div>
+                
+                <div id="favorites-container" class="waterfall-grid">
+                    <!-- Favorite games will be loaded here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3 data-i18n="footer.about">About Happy Games</h3>
+                <p data-i18n="footer.aboutDesc">Free online gaming platform for endless fun!</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.quickLinks">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="top-games.html" data-i18n="nav.topGames">Top Games</a></li>
+                    <li><a href="new-games.html" data-i18n="nav.newGames">New Games</a></li>
+                    <li><a href="categories.html" data-i18n="nav.categories">Categories</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.categories">Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="category/action.html" data-i18n="categories.action">Action Games</a></li>
+                    <li><a href="category/puzzle.html" data-i18n="categories.puzzle">Puzzle Games</a></li>
+                    <li><a href="category/strategy.html" data-i18n="categories.strategy">Strategy Games</a></li>
+                    <li><a href="category/racing.html" data-i18n="categories.racing">Racing Games</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.legal">Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="privacy-policy.html" data-i18n="footer.privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html" data-i18n="footer.termsOfService">Terms of Service</a></li>
+                    <li><a href="cookie-policy.html" data-i18n="footer.cookiePolicy">Cookie Policy</a></li>
+                    <li><a href="contact.html" data-i18n="footer.contactUs">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Happy Games. <span data-i18n="footer.copyright">All rights reserved.</span>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast-message">
+        <span id="toast-text"></span>
+    </div>
+
+    <script src="js/games-data.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/waterfall-grid.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

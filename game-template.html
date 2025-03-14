@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{GAME_TITLE}} - 快乐游戏</title>
+    <meta name="description" content="{{GAME_DESCRIPTION}}">
+    <meta name="keywords" content="{{GAME_TAGS}}, 在线游戏, 免费游戏, 快乐游戏">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/game.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo.png" alt="快乐游戏">
+                    <span>快乐游戏</span>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">首页</a></li>
+                    <li><a href="../categories.html">分类</a></li>
+                    <li><a href="../new.html">新游戏</a></li>
+                    <li><a href="../popular.html">热门</a></li>
+                </ul>
+            </nav>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="搜索游戏...">
+                <button id="search-button">🔍</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="game-container">
+                <h1 class="game-title">{{GAME_TITLE}}</h1>
+                
+                <div class="game-meta">
+                    <span class="category-badge">{{GAME_CATEGORIES}}</span>
+                    <span class="theme-badge">{{GAME_THEME}}</span>
+                    <span class="date-badge">{{GAME_DATE}}</span>
+                </div>
+                
+                <div class="game-frame-container">
+                    <iframe id="game-frame" src="{{GAME_IFRAME}}" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                    <div class="game-controls">
+                        <button id="fullscreen-btn" title="全屏">⛶</button>
+                        <button id="refresh-btn" title="刷新">🔄</button>
+                    </div>
+                </div>
+                
+                <div class="game-description">
+                    <h2>游戏介绍</h2>
+                    <p>{{GAME_DESCRIPTION}}</p>
+                </div>
+                
+                <div class="game-actions">
+                    <button id="like-btn" class="action-btn">👍 喜欢</button>
+                    <button id="share-btn" class="action-btn">📤 分享</button>
+                    <button id="report-btn" class="action-btn">⚠️ 报告问题</button>
+                </div>
+            </div>
+            
+            <div class="related-games">
+                <h2>相关游戏</h2>
+                <div class="games-grid" id="related-games-container">
+                    <!-- 相关游戏将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于我们</h3>
+                    <p>快乐游戏提供免费的在线游戏，让您随时随地享受游戏的乐趣。</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="../index.html">首页</a></li>
+                        <li><a href="../categories.html">游戏分类</a></li>
+                        <li><a href="../contact.html">联系我们</a></li>
+                        <li><a href="../privacy.html">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <p>邮箱: contact@happygames.com</p>
+                    <div class="social-icons">
+                        <a href="#" title="Facebook">📘</a>
+                        <a href="#" title="Twitter">🐦</a>
+                        <a href="#" title="Instagram">📷</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 快乐游戏. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/games-data.js"></script>
+    <script src="../js/game-page.js"></script>
+    <script>
+        // 游戏ID
+        const gameId = "{{GAME_ID}}";
+        
+        // 初始化游戏页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 全屏按钮
+            document.getElementById('fullscreen-btn').addEventListener('click', function() {
+                const gameFrame = document.getElementById('game-frame');
+                if (gameFrame.requestFullscreen) {
+                    gameFrame.requestFullscreen();
+                } else if (gameFrame.mozRequestFullScreen) {
+                    gameFrame.mozRequestFullScreen();
+                } else if (gameFrame.webkitRequestFullscreen) {
+                    gameFrame.webkitRequestFullscreen();
+                } else if (gameFrame.msRequestFullscreen) {
+                    gameFrame.msRequestFullscreen();
+                }
+            });
+            
+            // 刷新按钮
+            document.getElementById('refresh-btn').addEventListener('click', function() {
+                const gameFrame = document.getElementById('game-frame');
+                gameFrame.src = gameFrame.src;
+            });
+            
+            // 加载相关游戏
+            loadRelatedGames(gameId);
+        });
+        
+        // 加载相关游戏
+        function loadRelatedGames(currentGameId) {
+            // 这里应该实现加载相关游戏的逻辑
+            // 由于我们没有完整的JavaScript实现，这里只是一个占位符
+            console.log("加载与游戏ID相关的游戏: " + currentGameId);
+        }
+    </script>
+</body>
+</html>
