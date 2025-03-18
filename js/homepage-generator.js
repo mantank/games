@@ -97,28 +97,37 @@ document.addEventListener('DOMContentLoaded', function() {
     // 在瀑布流区域一次性加载所有热门游戏
     setupWaterfallGridForPopularGames();
     
-    // 验证新添加的游戏是否成功加载
-    const extremeCarGame = window.gamesData.find(game => game.id === "extreme-car-driving-parking");
-    if (extremeCarGame) {
-        console.log('[INFO] Extreme Car Driving Parking 游戏已成功加载');
-        
-        // 检查游戏是否被正确分类到赛车和动作游戏类别中
-        const racingSection = document.getElementById('racing-games');
-        const actionSection = document.getElementById('action-games');
-        
-        // 在优化分类函数运行后检查
-        setTimeout(() => {
-            if (racingSection && actionSection) {
-                const inRacingCategory = racingSection.querySelector('[data-game-id="extreme-car-driving-parking"]');
-                const inActionCategory = actionSection.querySelector('[data-game-id="extreme-car-driving-parking"]');
-                
-                console.log('[INFO] Extreme Car Driving Parking 在赛车游戏分类中:', !!inRacingCategory);
-                console.log('[INFO] Extreme Car Driving Parking 在动作游戏分类中:', !!inActionCategory);
+    // 添加Voxel World游戏加载检测
+    setTimeout(() => {
+        // 验证游戏是否能正确展示
+        const voxelWorldGame = window.gamesData.find(game => game.id === "voxel-world");
+        if (voxelWorldGame) {
+            console.log('[INFO] Voxel World游戏数据:', voxelWorldGame);
+            
+            // 检查游戏是否在相应分类中显示
+            const puzzleContainer = document.getElementById('puzzle-games');
+            const actionContainer = document.getElementById('action-games');
+            
+            if (puzzleContainer) {
+                const puzzleHasGame = puzzleContainer.querySelector('[data-game-id="voxel-world"]');
+                console.log('[INFO] Voxel World在益智游戏分类中显示:', !!puzzleHasGame);
             }
-        }, 500); // 给优化分类函数一些执行时间
-    } else {
-        console.error('[ERROR] 无法加载 Extreme Car Driving Parking 游戏');
-    }
+            
+            if (actionContainer) {
+                const actionHasGame = actionContainer.querySelector('[data-game-id="voxel-world"]');
+                console.log('[INFO] Voxel World在动作游戏分类中显示:', !!actionHasGame);
+            }
+            
+            // 检查在热门游戏区域
+            const waterfallContainer = document.getElementById('games-waterfall');
+            if (waterfallContainer) {
+                const waterfallHasGame = waterfallContainer.querySelector('[data-game-id="voxel-world"]');
+                console.log('[INFO] Voxel World在热门游戏瀑布流中显示:', !!waterfallHasGame);
+            }
+        } else {
+            console.error('[ERROR] 无法找到Voxel World游戏数据');
+        }
+    }, 1000); // 延迟1秒后检查，确保页面已完全加载
 });
 
 /**
@@ -312,112 +321,21 @@ function generateGameCards(container, games) {
  * @returns {HTMLElement} - The game card element
  */
 function createGameCard(game) {
+    if (!game) return null;
+    
     const gameCard = document.createElement('div');
     gameCard.className = 'game-card';
     gameCard.setAttribute('data-game-id', game.id);
     
-    // 获取当前语言
-    const currentLang = window.I18n ? window.I18n.getCurrentLanguage() : 'en';
-    
-    // 获取游戏标题（支持国际化）
-    let title = game.title;
-    if (game.titles && game.titles[currentLang]) {
-        title = game.titles[currentLang];
-    }
-    
-    // 获取"立即玩"按钮文本的翻译
-    const playNowText = window.I18n && typeof window.I18n.getTranslation === 'function' 
-        ? window.I18n.getTranslation('games.playNow') 
-        : 'Play Now';
-    
-    // 检查游戏是否在收藏夹中
-    const isFav = window.FavoritesManager && window.FavoritesManager.isFavorite(game.id);
-    const favIconClass = isFav ? 'fas fa-heart' : 'far fa-heart';
-    
     gameCard.innerHTML = `
-        <div class="game-thumb-container">
-            <img src="${game.thumbnail}" alt="${title}" class="game-thumb">
-            <div class="play-now-overlay">
-                <div class="game-title-overlay">${title}</div>
-                <span class="play-button">${playNowText}</span>
+        <a href="game.html?id=${game.id}" class="game-thumb-container">
+            <img src="${game.thumbnail}" alt="${game.title}" loading="lazy" class="game-thumb">
+            <div class="game-info-overlay">
+                <div class="game-title">${game.title}</div>
+                <div class="game-category">${(game.category || []).join(', ')}</div>
             </div>
-            <button class="favorite-btn ${isFav ? 'active' : ''}" data-game-id="${game.id}" title="${isFav ? '移出收藏' : '添加到收藏'}">
-                <i class="${favIconClass}"></i>
-            </button>
-            <button class="share-btn" data-game-id="${game.id}" title="分享">
-                <i class="fas fa-share-alt"></i>
-            </button>
-        </div>
+        </a>
     `;
-    
-    // 添加点击事件导航到游戏详情页
-    const thumbContainer = gameCard.querySelector('.game-thumb-container');
-    if (thumbContainer) {
-        thumbContainer.addEventListener('click', (e) => {
-            // 点击收藏或分享按钮时不导航
-            if (e.target.closest('.favorite-btn') || e.target.closest('.share-btn')) {
-                return;
-            }
-            // 在新标签页中打开游戏详情页
-            window.open(`game-detail.html?id=${game.id}`, '_blank');
-        });
-    }
-    
-    // 确保游戏卡片上的覆盖层也能导航
-    const playNowOverlay = gameCard.querySelector('.play-now-overlay');
-    if (playNowOverlay) {
-        playNowOverlay.addEventListener('click', (e) => {
-            // 点击收藏或分享按钮时不导航
-            if (e.target.closest('.favorite-btn') || e.target.closest('.share-btn')) {
-                return;
-            }
-            // 在新标签页中打开游戏详情页
-            window.open(`game-detail.html?id=${game.id}`, '_blank');
-        });
-    }
-    
-    // 添加收藏按钮点击事件
-    const favBtn = gameCard.querySelector('.favorite-btn');
-    if (favBtn && window.FavoritesManager) {
-        favBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const isFavorite = window.FavoritesManager.toggleFavorite(game);
-            
-            // 更新按钮状态
-            favBtn.classList.toggle('active', isFavorite);
-            favBtn.querySelector('i').className = isFavorite ? 'fas fa-heart' : 'far fa-heart';
-            favBtn.title = isFavorite ? '移出收藏' : '添加到收藏';
-            
-            // 显示提示信息
-            if (window.showFavoriteToast) {
-                window.showFavoriteToast(isFavorite);
-            }
-        });
-    }
-    
-    // 添加分享按钮点击事件
-    const shareBtn = gameCard.querySelector('.share-btn');
-    if (shareBtn) {
-        shareBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            if (window.openShareModal) {
-                window.openShareModal(game);
-            } else {
-                // 如果分享功能未定义，尝试使用navigator.share API
-                if (navigator.share) {
-                    navigator.share({
-                        title: title,
-                        text: `Check out ${title} on Happy Games!`,
-                        url: `${window.location.origin}/game-detail.html?id=${game.id}`
-                    }).catch(err => console.error('Share failed:', err));
-                }
-            }
-        });
-    }
     
     return gameCard;
 }

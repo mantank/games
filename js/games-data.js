@@ -1,5 +1,5 @@
 // Game Data
-const gamesData = [
+let gamesData = [
     // Game Data Template
     /*
     {
@@ -594,43 +594,6 @@ const gamesData = [
         isVertical: true
     },
     {
-        id: "voxel-world",
-        title: "Voxel World",
-        thumbnail: "games/voxel-world-lg.jpg",
-        url: "https://cloud.onlinegames.io/games/2025/unity/voxel-world/index-og.html",
-        description: "Build and explore your own voxel world. Create structures, mine resources, and survive in this engaging sandbox game.",
-        category: ["strategy", "puzzle"],
-        theme: ["sandbox", "building"],
-        tags: ["voxel", "crafting", "exploration", "building"],
-        rating: 4.7,
-        popularity: 890,
-        plays: 25600,
-        releaseDate: "2023-06-15",
-        descriptions: {
-            en: "Build and explore your own voxel world. Create structures, mine resources, and survive in this engaging sandbox game.",
-            zh: ""
-        }
-    },
-    {
-        id: "extreme-car-driving-parking",
-        title: "Extreme Car Driving Parking",
-        thumbnail: "games/Extreme Car Driving Parking-512x384.jpg",
-        url: "https://html5.gamemonetize.co/2a2sf2gg8nebhjofqsknb3pwm8oeb09h/",
-        iframe: '<iframe src="https://html5.gamemonetize.co/2a2sf2gg8nebhjofqsknb3pwm8oeb09h/" width="800" height="600" scrolling="none" frameborder="0"></iframe>',
-        description: "Test your driving skills in this challenging car parking simulation game. Navigate through difficult tracks and park your vehicle with precision in extreme conditions.",
-        category: ["racing", "action"],
-        theme: ["simulation", "driving"],
-        tags: ["car", "parking", "driving", "simulation", "skills"],
-        rating: 4.6,
-        popularity: 850,
-        plays: 18500,
-        releaseDate: "2023-09-14",
-        descriptions: {
-            en: "Test your driving skills in this challenging car parking simulation game. Navigate through difficult tracks and park your vehicle with precision in extreme conditions.",
-            zh: ""
-        }
-    },
-    {
         id: "valentines-day-mahjong",
         title: "Valentines Day Mahjong",
         thumbnail: "games/Valentines Day Mahjong-512x384.jpg",
@@ -730,6 +693,9 @@ const gamesData = [
     }
 ];
 
+// 现在这行过滤代码可以正常工作
+gamesData = gamesData.filter(game => game.id !== "voxel-world");
+
 // Game Categories
 const gameCategories = {
     "action": "Action Games",
@@ -802,111 +768,91 @@ function getRelatedGames(gameId, limit = 4) {
         .slice(0, limit);
 }
 
-// 更新游戏的分类（示例：更新现有游戏类别）
-// 这段代码需要放在加载游戏数据之后执行
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('[DEBUG] 开始重新分类游戏');
+// 标准化游戏数据
+function standardizeGamesData() {
+    if (!window.gamesData || !Array.isArray(window.gamesData)) return;
     
-    // 定义每个游戏适合的新分类
-    const gameNewCategories = {
-        // 原有游戏ID到新分类的映射
-        "kings-io": ["action", "multiplayer"],
-        "sparta-hoppers": ["action", "casual"],
-        "nuts-and-bolts-puzzle": ["puzzle", "casual"],
-        "tank-arena-online": ["action", "multiplayer"],
-        "monster-survivors": ["action", "shooting"],
-        "endless-cyberpunk-runner": ["action", "casual"],
-        "baby-noob-vs-baby-obby-horse": ["action", "casual"],
-        "dye-it-right-color-picker": ["puzzle", "casual"],
-        "hit-and-run-solo-leveling": ["action", "racing"],
-        "deep-in-the-lab": ["puzzle", "casual"],
-        "last-war-survival": ["action", "shooting"],
-        "flappy-twist": ["casual", "action"],
-        "sokoban-puzzle-game": ["puzzle", "casual"],
-        "john-is-a-lifeguard": ["action", "sports"],
-        "flip-master": ["sports", "action"],
-        "ramp-race": ["racing", "sports"],
-        "poppy-playtime-chapter-3": ["puzzle", "casual"],
-        "noodle-stack-runner": ["casual", "puzzle"],
-        "lego-pirate-adventure": ["action", "casual"],
-        "super-mario-and-sonic": ["action", "casual"],
-        "sunny-fields": ["casual", "puzzle"],
-        "animal-puzzle-kids": ["puzzle", "casual"],
-        "merge-fruits-2048": ["puzzle", "casual"],
-        "one-plus-two": ["puzzle", "casual"],
-        "car-racing-adventure": ["racing", "action"],
-        "ice-racing-game": ["racing", "action"],
-        "vertical-adventure-game": ["action", "casual"],
-        "fantasy-tower-defence": ["action", "shooting"],
-        "turkish-draughts": ["puzzle", "casual"],
-        "stack-tower": ["puzzle", "casual"],
-        "voxel-world": ["action", "puzzle"],
-        "extreme-car-driving-parking": ["racing", "casual"],
-        "valentines-day-mahjong": ["puzzle", "casual"],
-        "sprinkle-plants-puzzle-game": ["puzzle", "casual"],
-        "squid-game-merger": ["puzzle", "casual"],
-        "connect-one-line": ["puzzle", "casual"]
-    };
-    
-    // 更新每个游戏的分类
-    if (window.gamesData && Array.isArray(window.gamesData)) {
-        window.gamesData.forEach(game => {
-            if (gameNewCategories[game.id]) {
-                // 用新分类替换旧分类
-                game.category = gameNewCategories[game.id];
-                console.log(`[DEBUG] 更新游戏 ${game.title} 的分类为: ${game.category.join(', ')}`);
-            } else {
-                // 如果没有明确定义新分类，使用基于原有分类的映射
-                let newCategories = [];
-                
-                // 将原有分类映射到新分类系统
-                if (game.category) {
-                    if (game.category.includes('action') || game.category.includes('adventure')) {
-                        newCategories.push('action');
-                    }
-                    if (game.category.includes('puzzle') || game.category.includes('brain')) {
-                        newCategories.push('puzzle');
-                    }
-                    if (game.category.includes('racing')) {
-                        newCategories.push('racing');
-                    }
-                    if (game.category.includes('casual') || game.category.includes('arcade')) {
-                        newCategories.push('casual');
-                    }
-                    if (game.category.includes('shooter') || game.category.includes('tower-defense')) {
-                        newCategories.push('shooting');
-                    }
-                    if (game.category.includes('sports')) {
-                        newCategories.push('sports');
-                    }
-                    
-                    // 检查是否是多人游戏
-                    if (game.description && (
-                        game.description.toLowerCase().includes('multiplayer') || 
-                        game.description.toLowerCase().includes('multi-player') ||
-                        game.description.toLowerCase().includes('online')
-                    )) {
-                        newCategories.push('multiplayer');
-                    }
-                }
-                
-                // 确保每个游戏至少有一个分类
-                if (newCategories.length === 0) {
-                    newCategories.push('casual'); // 默认分类
-                }
-                
-                // 限制最多2个分类
-                if (newCategories.length > 2) {
-                    newCategories = newCategories.slice(0, 2);
-                }
-                
-                game.category = newCategories;
-                console.log(`[DEBUG] 自动分配游戏 ${game.title} 的分类为: ${game.category.join(', ')}`);
-            }
-        });
+    window.gamesData.forEach(game => {
+        // 确保游戏有ID
+        if (!game.id && game.title) {
+            game.id = game.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        }
         
-        console.log('[DEBUG] 游戏分类更新完成');
-    } else {
-        console.error('[ERROR] 无法找到游戏数据');
-    }
-}); 
+        // 统一URL属性
+        if (!game.gameUrl && game.url) {
+            game.gameUrl = game.url;
+        } else if (!game.gameUrl && !game.url && game.iframe) {
+            // 从iframe中提取URL
+            const urlMatch = game.iframe.match(/src="([^"]+)"/);
+            if (urlMatch && urlMatch[1]) {
+                game.gameUrl = urlMatch[1];
+            }
+        }
+        
+        // 统一特色和新游戏属性
+        if (game.featured !== undefined && game.isFeatured === undefined) {
+            game.isFeatured = game.featured;
+        }
+        if (game.new !== undefined && game.isNew === undefined) {
+            game.isNew = game.new;
+        }
+        
+        // 确保游戏有正确的分类
+        if (!game.category || !Array.isArray(game.category) || game.category.length === 0) {
+            game.category = ['casual']; // 默认分类
+        } else {
+            // 映射旧分类到新分类
+            const validCategories = ['action', 'puzzle', 'racing', 'casual', 'shooting', 'sports', 'multiplayer'];
+            const oldToNewCategory = {
+                'strategy': 'puzzle',
+                'adventure': 'action',
+                'brain': 'puzzle',
+                'arcade': 'casual',
+                'tower-defense': 'shooting',
+                'educational': 'puzzle',
+                'board': 'puzzle',
+                'skill': 'casual',
+                'simulation': 'casual',
+                'horror': 'action'
+            };
+            
+            // 转换分类
+            game.category = game.category.map(cat => {
+                if (validCategories.includes(cat)) {
+                    return cat;
+                }
+                return oldToNewCategory[cat] || 'casual';
+            });
+            
+            // 去重
+            game.category = [...new Set(game.category)];
+            
+            // 限制最多2个分类
+            if (game.category.length > 2) {
+                game.category = game.category.slice(0, 2);
+            }
+        }
+        
+        // 检查并修复缩略图路径
+        if (!game.thumbnail && game.image) {
+            game.thumbnail = game.image;
+        }
+        if (game.thumbnail && !game.thumbnail.startsWith('http') && !game.thumbnail.startsWith('games/') && !game.thumbnail.startsWith('/games/')) {
+            // 尝试修复可能的路径问题
+            if (!game.thumbnail.startsWith('images/')) {
+                game.thumbnail = 'games/' + game.thumbnail;
+            }
+        }
+    });
+    
+    console.log("[INFO] 游戏数据已标准化");
+}
+
+// 在DOMContentLoaded事件中调用此函数
+document.addEventListener('DOMContentLoaded', function() {
+    // ... 现有代码 ...
+    standardizeGamesData();
+    // ... 现有代码 ...
+});
+
+window.gamesData = gamesData; 

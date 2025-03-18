@@ -514,3 +514,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ... 现有代码 ...
 });
+
+window.addEventListener('error', function(e) {
+    console.error('JavaScript错误:', e.message);
+    // 可以显示一个友好的错误消息给用户
+});
