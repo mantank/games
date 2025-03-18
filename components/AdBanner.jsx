@@ -4,14 +4,22 @@ export default function AdBanner({ slot, format = 'auto', responsive = true, sty
   const adRef = useRef(null);
 
   useEffect(() => {
-    try {
-      // 确保 AdSense 代码加载完成
-      if (window.adsbygoogle) {
-        // 推送新广告
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
+    const loadAd = () => {
+      try {
+        if (typeof window !== 'undefined' && window.adsbygoogle) {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+      } catch (error) {
+        console.error('AdSense 加载错误:', error);
       }
-    } catch (error) {
-      console.error('AdSense 错误:', error);
+    };
+
+    // 确保 AdSense 脚本已加载
+    if (document.readyState === 'complete') {
+      loadAd();
+    } else {
+      window.addEventListener('load', loadAd);
+      return () => window.removeEventListener('load', loadAd);
     }
   }, []);
 
