@@ -5,12 +5,12 @@
 
 // Configuration
 const WATERFALL_CONFIG = {
-    initialGames: 15,       // Number of games to load initially
-    batchSize: 10,          // Number of games to load in each batch
-    loadThreshold: 200,     // Distance from bottom (in px) to trigger loading
-    animationDelay: 50,     // Delay between card animations (ms)
-    debounceDelay: 100,     // Debounce delay for scroll events (ms)
-    lazyLoadOffset: 300     // Distance (in px) to preload images
+    initialGames: 20,       // 增加初始加载游戏数量
+    batchSize: 15,          // 增加每批次加载游戏数量
+    loadThreshold: 300,     // 增加触发加载的距离，提前开始加载
+    animationDelay: 30,     // 减少动画延迟，使加载更加流畅
+    debounceDelay: 80,      // 优化滚动事件延迟
+    lazyLoadOffset: 500     // 增加预加载图片的距离
 };
 
 // State management
@@ -22,7 +22,8 @@ let waterfallState = {
     loadingIndicator: null, // The loading indicator element
     observer: null,         // Intersection observer for lazy loading
     scrollToTopBtn: null,   // Scroll to top button
-    visibleItems: new Set() // Currently visible game cards
+    visibleItems: new Set(), // Currently visible game cards
+    loadedGameIds: new Set() // 跟踪已经加载的游戏ID，防止重复
 };
 
 /**
@@ -31,6 +32,19 @@ let waterfallState = {
  * @param {Function} dataProvider - Function that returns game data
  */
 function initWaterfallGrid(containerId, dataProvider) {
+    // 重置状态，确保每次初始化时都是一个新的开始
+    waterfallState = {
+        loading: false,
+        page: 0,
+        hasMore: true,
+        container: null,
+        loadingIndicator: null,
+        observer: null,
+        scrollToTopBtn: null,
+        visibleItems: new Set(),
+        loadedGameIds: new Set()
+    };
+    
     // Get container element
     waterfallState.container = document.getElementById(containerId);
     if (!waterfallState.container) {
@@ -50,12 +64,11 @@ function initWaterfallGrid(containerId, dataProvider) {
     // Initialize intersection observer for lazy loading
     initLazyLoadObserver();
     
-    // Load initial batch of games
-    loadGames(dataProvider, WATERFALL_CONFIG.initialGames);
+    // 一次性加载所有游戏
+    loadGames(dataProvider, 1000);
     
-    // Set up scroll event listener with debounce
+    // 仅保留滚动到顶部按钮的更新事件
     window.addEventListener('scroll', debounce(() => {
-        handleScroll(dataProvider);
         updateScrollToTopButton();
     }, WATERFALL_CONFIG.debounceDelay));
     
@@ -71,61 +84,68 @@ function initWaterfallGrid(containerId, dataProvider) {
  * @param {number} count - Number of games to load
  */
 function loadGames(dataProvider, count) {
-    if (waterfallState.loading || !waterfallState.hasMore) return;
+    if (waterfallState.loading) return;
     
     waterfallState.loading = true;
     showLoadingIndicator();
     
-    // Get games data
-    const games = dataProvider(waterfallState.page, count);
+    // 一次性加载所有游戏，不再进行分页
+    const games = getAllGames(dataProvider);
     
     if (games.length === 0) {
-        waterfallState.hasMore = false;
         hideLoadingIndicator();
         waterfallState.loading = false;
         return;
     }
     
-    // Add games to grid with staggered animation
+    // 添加所有游戏到瀑布流中
     games.forEach((game, index) => {
+        // 记录已加载游戏ID，防止重复
+        waterfallState.loadedGameIds.add(game.id);
+        
         setTimeout(() => {
-            const gameCard = createGameCard(game, waterfallState.page * count + index);
+            const gameCard = createGameCard(game, index);
             waterfallState.container.appendChild(gameCard);
             
-            // Observe the card for lazy loading
+            // 观察图片懒加载
             if (waterfallState.observer && gameCard.querySelector('.game-thumb')) {
                 const img = gameCard.querySelector('.game-thumb');
                 waterfallState.observer.observe(img);
                 
-                // 确保图片有data-src属性
                 if (!img.src || img.src.includes('data:image/svg+xml')) {
                     if (img.dataset.src) {
-                        // 添加加载事件监听器
                         img.addEventListener('load', () => {
                             img.classList.add('loaded');
                         });
                     }
                 } else {
-                    // 如果已经有src，直接标记为已加载
                     img.classList.add('loaded');
                 }
             }
-        }, index * WATERFALL_CONFIG.animationDelay);
+        }, index * (WATERFALL_CONFIG.animationDelay / 2)); // 减少延迟，加快加载速度
     });
     
-    // Update state
-    waterfallState.page++;
-    
-    // Hide loading indicator after all cards are added
+    // 隐藏加载指示器
     setTimeout(() => {
         hideLoadingIndicator();
         waterfallState.loading = false;
-        
-        // Check if we need to load more (if viewport is not filled)
-        if (isNearBottom()) {
-            loadGames(dataProvider, WATERFALL_CONFIG.batchSize);
-        }
-    }, games.length * WATERFALL_CONFIG.animationDelay + 100);
+        // 禁用"加载更多"功能
+        waterfallState.hasMore = false;
+    }, Math.min(games.length * (WATERFALL_CONFIG.animationDelay / 2), 1000));
+}
+
+/**
+ * 获取所有游戏（不分页）
+ * @param {Function} dataProvider - 提供游戏数据的函数
+ * @returns {Array} - 所有游戏对象数组
+ */
+function getAllGames(dataProvider) {
+    // 直接获取所有游戏，不使用分页
+    if (typeof dataProvider === 'function') {
+        // 调用dataProvider但忽略分页参数，获取全部游戏
+        return dataProvider(0, 1000); // 使用一个很大的数字来获取所有游戏
+    }
+    return [];
 }
 
 /**
@@ -183,6 +203,7 @@ function createGameCard(game, index) {
                  alt="${title}" 
                  class="game-thumb lazy-load">
             <div class="play-now-overlay">
+                <div class="game-title-overlay">${title}</div>
                 <span class="play-button">${playNowText}</span>
             </div>
             <button class="favorite-btn ${isFav ? 'active' : ''}" data-game-id="${game.id}" title="${favTitle}">
@@ -202,20 +223,36 @@ function createGameCard(game, index) {
     `;
     
     // Add click event to navigate to game detail page
-    gameCard.querySelector('.game-thumb-container').addEventListener('click', (e) => {
-        // Don't navigate if clicking on favorite or share button
-        if (e.target.closest('.favorite-btn') || e.target.closest('.share-btn')) {
-            return;
-        }
-        window.location.href = `game-detail.html?id=${game.id}`;
-    });
+    const thumbContainer = gameCard.querySelector('.game-thumb-container');
+    if (thumbContainer) {
+        thumbContainer.addEventListener('click', (e) => {
+            // Don't navigate if clicking on favorite or share button
+            if (e.target.closest('.favorite-btn') || e.target.closest('.share-btn')) {
+                return;
+            }
+            window.open(`game-detail.html?id=${game.id}`, '_blank');
+        });
+    }
+    
+    // 确保游戏卡片上的覆盖层也能导航
+    const playNowOverlay = gameCard.querySelector('.play-now-overlay');
+    if (playNowOverlay) {
+        playNowOverlay.addEventListener('click', (e) => {
+            // 点击收藏或分享按钮时不导航
+            if (e.target.closest('.favorite-btn') || e.target.closest('.share-btn')) {
+                return;
+            }
+            // 在新标签页中打开游戏详情页
+            window.open(`game-detail.html?id=${game.id}`, '_blank');
+        });
+    }
     
     // 单独为Play Now按钮添加点击事件
     const playNowButton = gameCard.querySelector('.play-now-button');
     if (playNowButton) {
         playNowButton.addEventListener('click', (e) => {
             e.stopPropagation();
-            window.location.href = `game-detail.html?id=${game.id}`;
+            window.open(`game-detail.html?id=${game.id}`, '_blank');
         });
     }
     
@@ -485,8 +522,7 @@ function createLoadingIndicator() {
     waterfallState.loadingIndicator = document.createElement('div');
     waterfallState.loadingIndicator.className = 'loading-indicator';
     waterfallState.loadingIndicator.innerHTML = `
-        <div class="spinner"></div>
-        <span>Loading more games...</span>
+        <span>正在加载所有游戏，请稍候...</span>
     `;
     waterfallState.loadingIndicator.style.display = 'none';
     
@@ -598,6 +634,33 @@ function getWaterfallGames(page, count) {
     }
     
     return [];
+}
+
+/**
+ * Get popular games data for waterfall grid
+ * This function returns all popular games at once
+ * @returns {Array} - Array of all popular game objects sorted by popularity
+ */
+function getPopularWaterfallGames() {
+    // 一次性获取所有热门游戏，不再分页
+    let popularGames = [];
+    
+    if (typeof getFilteredPopularGames === 'function') {
+        popularGames = getFilteredPopularGames();
+    } else if (typeof gamesData !== 'undefined' && Array.isArray(gamesData)) {
+        // 兼容性处理，如果getFilteredPopularGames不可用，则使用原始方法
+        // 确保我们创建一个新数组副本，并按照人气降序排序
+        popularGames = [...gamesData].sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+    }
+    
+    // 确保游戏数据不为空
+    if (!popularGames || popularGames.length === 0) {
+        console.warn('无法加载热门游戏数据');
+        return [];
+    }
+    
+    console.log(`一次性加载所有热门游戏，共${popularGames.length}个游戏`);
+    return popularGames;
 }
 
 // Export functions for use in other scripts

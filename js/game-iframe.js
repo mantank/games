@@ -19,6 +19,12 @@ function loadGameIframe(game, containerId = 'game-iframe-container') {
     if (game.isVertical) {
         iframeContainer.classList.add('vertical-game-iframe-container');
         iframeContainer.classList.remove('game-iframe-container');
+        
+        // 在新的垂直游戏响应式脚本加载后，调用其调整尺寸函数
+        if (window.VerticalGameResponsive && typeof window.VerticalGameResponsive.adjustSize === 'function') {
+            console.log('[Game Iframe] 调用垂直游戏自适应尺寸函数');
+            window.VerticalGameResponsive.adjustSize(iframeContainer);
+        }
     } else {
         iframeContainer.classList.add('game-iframe-container');
         iframeContainer.classList.remove('vertical-game-iframe-container');

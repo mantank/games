@@ -149,6 +149,7 @@
     <script src="js/games-data.js"></script>
     <script src="js/favorites.js"></script>
     <script src="js/game-iframe.js"></script>
+    <script src="js/vertical-game-responsive.js"></script>
     <script src="js/waterfall-grid.js"></script>
     <script src="script.js"></script>
     <script>
@@ -298,33 +299,84 @@
             const gameCard = document.createElement('div');
             gameCard.className = 'game-card';
             
-            // Get description based on current language
-            let description = game.description; // Default description
-            if (game.descriptions && window.I18n) {
-                const currentLang = window.I18n.getCurrentLanguage();
-                if (game.descriptions[currentLang]) {
-                    description = game.descriptions[currentLang];
-                } else if (game.descriptions.en) {
-                    description = game.descriptions.en;
-                }
+            // 获取当前语言
+            const currentLang = window.I18n ? window.I18n.getCurrentLanguage() : 'en';
+            
+            // 获取游戏标题（支持国际化）
+            let title = game.title;
+            if (game.titles && game.titles[currentLang]) {
+                title = game.titles[currentLang];
             }
+            
+            // 检查游戏是否在收藏夹中
+            const isFav = window.FavoritesManager && window.FavoritesManager.isFavorite(game.id);
+            const favIconClass = isFav ? 'fas fa-heart' : 'far fa-heart';
             
             gameCard.innerHTML = `
                 <div class="game-thumb-container">
-                    <img src="${game.thumbnail}" alt="${game.title}" class="game-thumb">
+                    <img src="${game.thumbnail}" alt="${title}" class="game-thumb">
                     <div class="play-now-overlay">
+                        <div class="game-title-overlay">${title}</div>
                         <span class="play-button">Play Now</span>
                     </div>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">${game.title}</h3>
-                    <p class="game-description">${description.substring(0, 80)}${description.length > 80 ? '...' : ''}</p>
+                    <button class="favorite-btn ${isFav ? 'active' : ''}" data-game-id="${game.id}" title="${isFav ? '移出收藏' : '添加到收藏'}">
+                        <i class="${favIconClass}"></i>
+                    </button>
+                    <button class="share-btn" data-game-id="${game.id}" title="分享">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
                 </div>
             `;
             
-            gameCard.addEventListener('click', () => {
-                window.location.href = `game-detail.html?id=${game.id}`;
+            // 添加点击事件导航到游戏详情页
+            gameCard.querySelector('.game-thumb-container').addEventListener('click', (e) => {
+                // 点击收藏或分享按钮时不导航
+                if (e.target.closest('.favorite-btn') || e.target.closest('.share-btn')) {
+                    return;
+                }
+                // 在新标签页中打开游戏详情页
+                window.open(`game-detail.html?id=${game.id}`, '_blank', 'noopener,noreferrer');
             });
+            
+            // 添加收藏按钮点击事件
+            const favBtn = gameCard.querySelector('.favorite-btn');
+            if (favBtn && window.FavoritesManager) {
+                favBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isFavorite = window.FavoritesManager.toggleFavorite(game);
+                    
+                    // 更新按钮状态
+                    favBtn.classList.toggle('active', isFavorite);
+                    favBtn.querySelector('i').className = isFavorite ? 'fas fa-heart' : 'far fa-heart';
+                    favBtn.title = isFavorite ? '移出收藏' : '添加到收藏';
+                    
+                    // 显示提示信息
+                    if (window.showFavoriteToast) {
+                        window.showFavoriteToast(isFavorite);
+                    }
+                });
+            }
+            
+            // 添加分享按钮点击事件
+            const shareBtn = gameCard.querySelector('.share-btn');
+            if (shareBtn) {
+                shareBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    if (window.openShareModal) {
+                        window.openShareModal(game);
+                    } else if (navigator.share) {
+                        navigator.share({
+                            title: title,
+                            text: `Check out ${title} on Happy Games!`,
+                            url: `${window.location.origin}/game-detail.html?id=${game.id}`
+                        }).catch(err => console.error('Share failed:', err));
+                    }
+                });
+            }
             
             return gameCard;
         }

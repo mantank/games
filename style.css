@@ -522,7 +522,7 @@ nav ul li a.active::before {
     z-index: 1;
 }
 
-/* 统一所有游戏卡片样式 */
+/* 重新设计游戏卡片，只保留游戏缩略图 */
 .game-card {
     background: rgba(10, 15, 30, 0.7);
     border-radius: 8px;
@@ -534,7 +534,8 @@ nav ul li a.active::before {
     height: 100%;
     display: flex;
     flex-direction: column;
-    min-height: 300px;
+    /* 减小最小高度，因为我们只显示缩略图 */
+    min-height: 200px;
 }
 
 .game-card:hover {
@@ -548,16 +549,15 @@ nav ul li a.active::before {
     display: none;
 }
 
+/* 修改缩略图容器为全高 */
 .game-thumb-container {
     position: relative;
     width: 100%;
-    height: 150px;
+    height: 100%;
     overflow: hidden;
-    border-radius: 8px 8px 0 0;
-    margin-bottom: 0;
+    border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.2);
-    min-height: 150px;
-    max-height: 150px;
+    /* 移除最小高度和最大高度的限制 */
 }
 
 .game-thumb {
@@ -571,62 +571,44 @@ nav ul li a.active::before {
     transform: scale(1.05);
 }
 
-/* 移除旧的悬停缩略图 */
-.game-thumb-hover {
+/* 默认隐藏游戏信息 */
+.game-info {
     display: none;
 }
 
-.game-info {
-    padding: 12px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 110px;
-}
-
-.game-title {
-    margin: 0 0 8px 0;
-    font-size: 1.1rem;
-    color: var(--neon-blue);
-    max-height: 2.2rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-.game-card .game-description {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #ccc;
-    line-height: 1.4;
-    max-height: 4.2rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-}
-
-/* 统一播放按钮样式 */
+/* 修改播放按钮覆盖层样式 */
 .play-now-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 10;
+    cursor: pointer; /* 确保光标显示为可点击状态 */
 }
 
 .game-card:hover .play-now-overlay {
     opacity: 1;
+}
+
+/* 添加游戏标题到悬停层 */
+.play-now-overlay .game-title-overlay {
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 0 10px;
+    font-weight: bold;
+    max-width: 90%;
+    text-shadow: 0 0 5px var(--neon-blue);
+    display: block; /* 确保标题显示 */
 }
 
 .play-button {
@@ -639,6 +621,7 @@ nav ul li a.active::before {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 0 10px rgba(0, 162, 255, 0.5);
     z-index: 11;
+    cursor: pointer;
 }
 
 .game-card:hover .play-button {
@@ -646,7 +629,7 @@ nav ul li a.active::before {
     box-shadow: 0 0 15px rgba(0, 162, 255, 0.8);
 }
 
-/* Waterfall Grid Layout */
+/* 瀑布流布局中的游戏卡片样式 */
 #games-waterfall {
     margin-top: 20px;
     min-height: 200px;
@@ -664,7 +647,7 @@ nav ul li a.active::before {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeIn 0.5s ease forwards;
-    min-height: 300px;
+    min-height: 200px;
 }
 
 @keyframes fadeIn {
@@ -684,201 +667,86 @@ nav ul li a.active::before {
     transform: scale(1.05);
 }
 
-/* 确保所有游戏卡片的播放按钮样式一致 */
-.game-card .play-now-overlay,
-#games-waterfall .game-card .play-now-overlay {
+/* 确保收藏和分享按钮在新设计中正确显示 */
+.favorite-btn,
+.share-btn {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.game-card:hover .play-now-overlay,
-#games-waterfall .game-card:hover .play-now-overlay {
-    opacity: 1;
-}
-
-.game-card .play-button,
-#games-waterfall .game-card .play-button {
-    background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: bold;
-    transform: scale(0.9);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 162, 255, 0.5);
-}
-
-.game-card:hover .play-button,
-#games-waterfall .game-card:hover .play-button {
-    transform: scale(1);
-    box-shadow: 0 0 15px rgba(0, 162, 255, 0.8);
-}
-
-/* 瀑布流布局中的游戏卡片样式 */
-#games-waterfall .game-card .game-thumb-container {
-    position: relative;
-    overflow: hidden;
-    height: 150px;
-    min-height: 150px;
-    max-height: 150px;
-    border-radius: 8px 8px 0 0;
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
-#games-waterfall .game-card .game-thumb {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-#games-waterfall .game-card .game-info {
-    padding: 12px;
-    flex-grow: 1;
     display: flex;
-    flex-direction: column;
-    min-height: 110px;
-}
-
-#games-waterfall .game-card .game-title {
-    margin: 0 0 8px 0;
-    font-size: 1.1rem;
-    color: var(--neon-blue);
-    max-height: 2.2rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-#games-waterfall .game-card .game-description {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #ccc;
-    line-height: 1.4;
-    max-height: 4.2rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-}
-
-/* 确保瀑布流布局中的按钮样式一致 */
-#games-waterfall .game-card .favorite-btn,
-#games-waterfall .game-card .share-btn {
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#games-waterfall .game-card:hover .favorite-btn,
-#games-waterfall .game-card:hover .share-btn {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Loading indicator for infinite scroll */
-.loading-indicator {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 20px;
-    margin: 20px 0;
-    width: 100%;
-    color: var(--neon-blue);
-}
-
-.loading-indicator .spinner {
-    width: 30px;
-    height: 30px;
-    border: 3px solid rgba(0, 162, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: var(--neon-blue);
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 10px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Scroll to top button */
-.scroll-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: rgba(10, 15, 30, 0.8);
-    border: 2px solid var(--neon-blue);
-    border-radius: 50%;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    color: var(--neon-blue);
     cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 20;
     opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    z-index: 1000;
-    box-shadow: 0 0 10px rgba(0, 162, 255, 0.5);
+    transform: translateY(10px);
 }
 
-.scroll-to-top.visible {
+.favorite-btn {
+    top: 10px;
+    right: 10px;
+}
+
+.share-btn {
+    top: 10px;
+    right: 56px;
+}
+
+.game-card:hover .favorite-btn,
+.game-card:hover .share-btn {
     opacity: 1;
-    visibility: visible;
     transform: translateY(0);
 }
 
-.scroll-to-top:hover {
-    background: rgba(0, 162, 255, 0.2);
-}
-
-/* Responsive grid columns for different screen sizes */
-@media (min-width: 1200px) {
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .games-grid, 
     #games-waterfall {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    
+    .game-card {
+        min-height: 180px;
+    }
+    
+    #games-waterfall .game-card {
+        min-height: 180px;
+    }
+    
+    .play-now-overlay .game-title-overlay {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
     }
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (max-width: 480px) {
+    .games-grid, 
     #games-waterfall {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    #games-waterfall {
-        grid-template-columns: repeat(3, 1fr);
+    
+    .game-card {
+        min-height: 140px;
     }
-}
-
-@media (min-width: 576px) and (max-width: 767px) {
-    #games-waterfall {
-        grid-template-columns: repeat(2, 1fr);
+    
+    #games-waterfall .game-card {
+        min-height: 140px;
     }
-}
-
-@media (max-width: 575px) {
-    #games-waterfall {
-        grid-template-columns: repeat(1, 1fr);
+    
+    .play-button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
     }
-}
-
-/* Animation delay based on order */
-.waterfall-grid .game-card {
-    animation-delay: calc(var(--animation-order) * 0.05s);
+    
+    .play-now-overlay .game-title-overlay {
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+    }
 }
 
 /* === 搜索框样式 === */
@@ -1281,85 +1149,6 @@ nav ul li a.active::before {
     }
 }
 
-/* 收藏和分享按钮样式 */
-.favorite-btn,
-.share-btn {
-    position: absolute;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 20;
-    opacity: 0;
-    transform: translateY(10px);
-}
-
-.favorite-btn {
-    top: 10px;
-    right: 10px;
-}
-
-.share-btn {
-    top: 10px;
-    right: 56px;
-}
-
-.game-card:hover .favorite-btn,
-.game-card:hover .share-btn {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.favorite-btn:hover,
-.share-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
-    transform: scale(1.1);
-}
-
-.favorite-btn.active {
-    background: rgba(255, 0, 128, 0.8);
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-.favorite-btn.active:hover {
-    background: rgba(255, 0, 128, 1);
-}
-
-/* 确保瀑布流布局中的按钮也有相同的样式 */
-.waterfall-grid .game-card .favorite-btn,
-.waterfall-grid .game-card .share-btn {
-    opacity: 0;
-}
-
-.waterfall-grid .game-card:hover .favorite-btn,
-.waterfall-grid .game-card:hover .share-btn {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 统一游戏卡片的动画效果 */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.game-card {
-    animation: fadeIn 0.5s ease forwards;
-}
-
 /* === Footer Styles === */
 footer {
     background-color: var(--darker-bg);
@@ -1602,7 +1391,7 @@ footer::before {
 
 .game-iframe-container {
     position: relative;
-        width: 100%;
+    width: 100%;
     height: 0;
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
     margin-bottom: 30px;
@@ -1613,7 +1402,54 @@ footer::before {
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
 
-.game-iframe-container iframe {
+/* 垂直游戏容器 - 响应式设计 */
+.vertical-game-iframe-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* 控制最大宽度 */
+    margin: 0 auto 30px; /* 居中显示 */
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    height: 80vh; /* 默认高度为视口高度的80% */
+    max-height: 800px; /* 最大高度限制 */
+}
+
+/* 大屏幕显示 */
+@media (min-width: 1200px) {
+    .vertical-game-iframe-container {
+        max-width: 450px;
+        height: 80vh;
+    }
+}
+
+/* 中等屏幕显示 */
+@media (max-width: 1199px) and (min-width: 768px) {
+    .vertical-game-iframe-container {
+        max-width: 400px;
+        height: 75vh;
+    }
+}
+
+/* 平板显示 */
+@media (max-width: 767px) and (min-width: 481px) {
+    .vertical-game-iframe-container {
+        max-width: 350px;
+        height: 70vh;
+    }
+}
+
+/* 手机显示 */
+@media (max-width: 480px) {
+    .vertical-game-iframe-container {
+        width: 90%;
+        height: 65vh;
+    }
+}
+
+.game-iframe-container iframe, .vertical-game-iframe-container iframe {
     position: absolute;
     top: 0;
     left: 0;
@@ -2011,119 +1847,57 @@ footer::before {
     }
 }
 
-/* 垂直游戏样式 */
-.vertical-game-iframe-container {
-    position: relative;
-    width: 100%;
-    max-width: 450px;
-    height: 0;
-    padding-bottom: 177.78%; /* 9:16 aspect ratio */
-    margin: 0 auto 30px;
-    background-color: #000;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 2px solid var(--neon-blue);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-}
-
-.vertical-game-iframe-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* 垂直游戏在移动设备上的样式 */
-@media (max-width: 768px) {
-    .vertical-game-iframe-container {
-        max-width: 100%;
-        padding-bottom: 177.78%; /* 保持9:16的比例 */
-    }
-}
-
-/* Play Now Button Styles */
-.play-now-button-container {
-    margin-top: 12px;
-    text-align: center;
-}
-
-.play-now-button {
-    background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
-    color: #000;
-    font-weight: bold;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 16px;
-    font-size: 14px;
+/* 返回顶部按钮 */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #8e44ad;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(57, 255, 20, 0.7);
-    animation: pulseButton 2s infinite;
-}
-
-.play-now-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, 0.8) 50%, 
-        rgba(255, 255, 255, 0) 100%);
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
-    z-index: 1;
-}
-
-.play-now-button i {
-    margin-left: 5px;
-    position: relative;
-    z-index: 2;
-}
-
-.play-now-button span {
-    position: relative;
-    z-index: 2;
-}
-
-.play-now-button:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 7px 15px rgba(57, 255, 20, 0.8);
-    animation: none;
-}
-
-.play-now-button:active {
-    transform: translateY(1px);
-}
-
-/* 添加分类部分高亮效果的样式 */
-.game-section.highlighted {
-    animation: highlight-pulse 3s ease-in-out;
-    position: relative;
-}
-
-.game-section.highlighted::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2px solid var(--accent-color);
-    border-radius: 10px;
-    pointer-events: none;
-    z-index: 1;
+    z-index: 1000;
+    border: none;
     opacity: 0.8;
 }
 
-@keyframes highlight-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(var(--accent-color-rgb), 0.4); }
-    50% { box-shadow: 0 0 0 10px rgba(var(--accent-color-rgb), 0.2); }
-    100% { box-shadow: 0 0 0 0 rgba(var(--accent-color-rgb), 0); }
+.scroll-to-top-btn:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.scroll-to-top-btn i {
+    font-size: 20px;
+}
+
+/* 懒加载图片 */
+.game-thumb.lazy-load {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.game-thumb.lazy-load.loaded {
+    opacity: 1;
+}
+
+/* 移动设备优化 */
+@media (max-width: 768px) {
+    .waterfall-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-gap: 15px;
+    }
+    
+    .scroll-to-top-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
 }

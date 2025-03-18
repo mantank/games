@@ -23,87 +23,11 @@ const gamesData = [
     }
     */
     {
-        id: "kings-io",
-        title: "Kings IO",
-        description: "Battle for the crown in this intense multiplayer io game! Control your royal character, collect gems to grow stronger, and defeat other players to claim their territory. With strategic gameplay, power-ups, and a constantly evolving battlefield, Kings IO offers endless competition and excitement. Upgrade your abilities, form alliances, and dominate the kingdom to become the ultimate ruler. Can you rise to the top of the leaderboard and maintain your reign as the mightiest king?",
-        thumbnail: "games/Kings-io-lg.jpg",
-        category: ["action", "strategy"],
-        theme: ["fantasy", "adventure"],
-        isFeatured: true,
-        isNew: true,
-        popularity: 98,
-        dateAdded: "2024-07-03",
-        gameUrl: "https://cloud.onlinegames.io/games/2025/construct/208/kings-io/index-og.html",
-        width: 1024,
-        height: 768,
-        aspectRatio: "4:3",
-        allowFullscreen: true,
-        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
-        requiredPermissions: []
-    },
-    {
-        id: "sparta-hoppers",
-        title: "Sparta Hoppers",
-        description: "Join the ranks of elite Spartan warriors in this challenging action arcade game! Test your reflexes and timing as you jump, dodge, and battle your way through increasingly difficult levels. With stunning ancient Greek-inspired visuals and addictive gameplay mechanics, Sparta Hoppers offers an exciting adventure that combines skill-based challenges with historical themes. Can you become the ultimate Spartan hero and conquer all obstacles in your path?",
-        thumbnail: "games/sparta-hoppers-game-lg.jpg",
-        category: ["action", "arcade"],
-        theme: ["retro", "adventure"],
-        isFeatured: true,
-        isNew: true,
-        popularity: 95,
-        dateAdded: "2024-07-03",
-        gameUrl: "https://cloud.onlinegames.io/games/2025/construct/227/spartahoppers/index-og.html",
-        width: 1024,
-        height: 768,
-        aspectRatio: "4:3",
-        allowFullscreen: true,
-        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
-        requiredPermissions: []
-    },
-    {
-        id: "nuts-and-bolts-puzzle",
-        title: "Nuts and Bolts Puzzle",
-        description: "Challenge your logical thinking with this engaging mechanical puzzle game! Arrange nuts, bolts, gears and other mechanical parts to solve increasingly complex mechanical puzzles. With intuitive controls and progressively difficult levels, Nuts and Bolts Puzzle offers a satisfying brain-teasing experience that will test your spatial reasoning and problem-solving skills. Can you master all the intricate puzzles and become a mechanical genius?",
-        thumbnail: "games/nuts-and-bolts-puzzle-lg.jpg",
-        category: ["puzzle", "brain"],
-        theme: ["minimalist"],
-        isFeatured: true,
-        isNew: true,
-        popularity: 96,
-        dateAdded: "2024-07-02",
-        gameUrl: "https://cloud.onlinegames.io/games/2025/unity/nuts-and-bolts-puzzle/index-og.html",
-        width: 1024,
-        height: 768,
-        aspectRatio: "4:3",
-        allowFullscreen: true,
-        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
-        requiredPermissions: []
-    },
-    {
-        id: "tank-arena-online",
-        title: "Tank Arena Online",
-        description: "Battle in intense tank warfare across dynamic arenas! Command your customizable tank, destroy opponents, and dominate the battlefield in this action-packed multiplayer game. With various weapons, power-ups, and strategic gameplay elements, Tank Arena Online offers endless tactical possibilities. Upgrade your tank, master different terrain types, and climb the global leaderboards in this thrilling combat experience.",
-        thumbnail: "games/Tank-Arena-Online-lg.jpg",
-        category: ["action", "strategy"],
-        theme: ["retro", "adventure"],
-        isFeatured: true,
-        isNew: true,
-        popularity: 97,
-        dateAdded: "2024-07-01",
-        gameUrl: "https://cloud.onlinegames.io/games/2025/construct/293/tank-arena/index-og.html",
-        width: 1024,
-        height: 768,
-        aspectRatio: "4:3",
-        allowFullscreen: true,
-        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
-        requiredPermissions: []
-    },
-    {
         id: "monster-survivors",
         title: "Monster Survivors",
         description: "Survive endless waves of monsters in this intense action game! Control your character, strategically collect power-ups, and eliminate hordes of creatures as you level up your abilities. With rogue-lite elements, each run offers a unique experience as you unlock new characters and abilities to survive longer in this challenging monster apocalypse.",
         thumbnail: "games/Monster-survivors-lg.jpg",
-        category: ["action", "strategy"],
+        category: ["action", "survival"],
         theme: ["fantasy", "adventure"],
         featured: true,
         new: true,
@@ -122,7 +46,7 @@ const gamesData = [
         title: "Endless Cyberpunk Runner",
         description: "Run through a futuristic cyberpunk city in this fast-paced endless runner. Dodge obstacles, collect power-ups, and see how far you can go in this neon-lit adventure. With increasing speed and difficulty, test your reflexes and compete for the highest score in this thrilling arcade experience.",
         thumbnail: "games/Endless Cyberpunk Runner-512x384.jpg",
-        category: ["action", "puzzle"],
+        category: ["action", "arcade"],
         theme: ["cyberpunk", "scifi"],
         featured: true,
         new: true,
@@ -139,7 +63,7 @@ const gamesData = [
         title: "Baby Noob vs Baby Obby Horse",
         description: "Embark on an exciting adventure with Baby Noob as they face off against Baby Obby Horse in this fun obstacle course game! Navigate through challenging levels, avoid traps, and collect rewards as you race to the finish line. With colorful graphics, simple controls, and increasingly difficult challenges, this game offers endless entertainment for players of all ages.",
         thumbnail: "games/Baby Noob vs Baby Obby Horse-512x384.jpg",
-        category: ["action", "sports"],
+        category: ["adventure", "arcade"],
         theme: ["cartoon"],
         gameUrl: "https://html5.gamemonetize.co/qoi0njrme4iwwxsawr338w1592i3loeu/",
         isFeatured: true,
@@ -348,7 +272,7 @@ const gamesData = [
         title: "Noodle Stack Runner",
         description: "Race through exciting levels in this addictive vertical runner game! Stack noodles as you run, creating the perfect balance to overcome obstacles and reach new heights. With colorful graphics and simple one-touch controls, Noodle Stack Runner offers a fun challenge for players of all ages. Collect power-ups, unlock new characters, and compete for the highest score in this fast-paced mobile-style game.", 
         thumbnail: "games/Noodle Stack Runner-512x384.jpg",
-        category: ["action", "puzzle"],
+        category: ["action", "arcade"],
         theme: ["cartoon"],
         gameUrl: "https://html5.gamemonetize.co/me10twl3ggmhi220yxqtnxgocpqdjhun/",
         isFeatured: true,
@@ -592,153 +516,26 @@ const gamesData = [
         sandboxOptions: "allow-scripts allow-same-origin allow-popups",
         requiredPermissions: [],
         isVertical: true
-    },
-    {
-        id: "voxel-world",
-        title: "Voxel World",
-        thumbnail: "games/voxel-world-lg.jpg",
-        url: "https://cloud.onlinegames.io/games/2025/unity/voxel-world/index-og.html",
-        description: "Build and explore your own voxel world. Create structures, mine resources, and survive in this engaging sandbox game.",
-        category: ["strategy", "puzzle"],
-        theme: ["sandbox", "building"],
-        tags: ["voxel", "crafting", "exploration", "building"],
-        rating: 4.7,
-        popularity: 890,
-        plays: 25600,
-        releaseDate: "2023-06-15",
-        descriptions: {
-            en: "Build and explore your own voxel world. Create structures, mine resources, and survive in this engaging sandbox game.",
-            zh: ""
-        }
-    },
-    {
-        id: "extreme-car-driving-parking",
-        title: "Extreme Car Driving Parking",
-        thumbnail: "games/Extreme Car Driving Parking-512x384.jpg",
-        url: "https://html5.gamemonetize.co/2a2sf2gg8nebhjofqsknb3pwm8oeb09h/",
-        iframe: '<iframe src="https://html5.gamemonetize.co/2a2sf2gg8nebhjofqsknb3pwm8oeb09h/" width="800" height="600" scrolling="none" frameborder="0"></iframe>',
-        description: "Test your driving skills in this challenging car parking simulation game. Navigate through difficult tracks and park your vehicle with precision in extreme conditions.",
-        category: ["racing", "action"],
-        theme: ["simulation", "driving"],
-        tags: ["car", "parking", "driving", "simulation", "skills"],
-        rating: 4.6,
-        popularity: 850,
-        plays: 18500,
-        releaseDate: "2023-09-14",
-        descriptions: {
-            en: "Test your driving skills in this challenging car parking simulation game. Navigate through difficult tracks and park your vehicle with precision in extreme conditions.",
-            zh: ""
-        }
-    },
-    {
-        id: "valentines-day-mahjong",
-        title: "Valentines Day Mahjong",
-        thumbnail: "games/Valentines Day Mahjong-512x384.jpg",
-        description: "Enjoy this romantic Valentine's Day-themed Mahjong game! Match pairs of identical tiles to clear the board in this classic tile-matching puzzle. With beautiful Valentine's designs, relaxing gameplay, and increasing levels of difficulty, this game offers a perfect blend of challenge and romance.",
-        category: ["puzzle", "board"],
-        theme: ["classic", "cartoon"],
-        gameUrl: "https://html5.gamemonetize.co/xyp1vx5bqkgjmplhju75kq4mt9bky8dw/",
-        iframe: '<iframe src="https://html5.gamemonetize.co/xyp1vx5bqkgjmplhju75kq4mt9bky8dw/" width="800" height="450" scrolling="none" frameborder="0"></iframe>',
-        isFeatured: true,
-        isNew: true,
-        popularity: 85,
-        dateAdded: "2024-07-10",
-        width: 800,
-        height: 450,
-        aspectRatio: "16:9",
-        allowFullscreen: true,
-        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
-        requiredPermissions: [],
-        descriptions: {
-            en: "Enjoy this romantic Valentine's Day-themed Mahjong game! Match pairs of identical tiles to clear the board in this classic tile-matching puzzle. With beautiful Valentine's designs, relaxing gameplay, and increasing levels of difficulty, this game offers a perfect blend of challenge and romance.",
-            zh: ""
-        }
-    },
-    {
-        id: "sprinkle-plants-puzzle-game",
-        title: "Sprinkle Plants Puzzle Game",
-        thumbnail: "games/Sprinkle Plants Puzzle Game-512x384.jpg",
-        description: "Grow your own virtual garden in this relaxing puzzle game! Water your plants carefully, solve plant-related puzzles, and watch your garden flourish. With beautiful graphics and engaging gameplay mechanics, Sprinkle Plants offers a perfect blend of puzzle-solving and plant simulation that will test your gardening skills and strategic thinking.",
-        category: ["puzzle", "simulation"],
-        theme: ["cartoon", "minimalist"],
-        gameUrl: "https://html5.gamemonetize.co/t8o0mltu7cuze9lx131k7ovkpkafnv3z/",
-        iframe: '<iframe src="https://html5.gamemonetize.co/t8o0mltu7cuze9lx131k7ovkpkafnv3z/" width="750" height="1334" scrolling="none" frameborder="0"></iframe>',
-        isFeatured: true,
-        isNew: true,
-        popularity: 88,
-        dateAdded: "2024-07-11",
-        width: 750,
-        height: 1334,
-        aspectRatio: "9:16",
-        allowFullscreen: true,
-        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
-        requiredPermissions: [],
-        isVertical: true,
-        descriptions: {
-            en: "Grow your own virtual garden in this relaxing puzzle game! Water your plants carefully, solve plant-related puzzles, and watch your garden flourish. With beautiful graphics and engaging gameplay mechanics, Sprinkle Plants offers a perfect blend of puzzle-solving and plant simulation that will test your gardening skills and strategic thinking.",
-            zh: ""
-        }
-    },
-    {
-        id: "squid-game-merger",
-        title: "Squid Game Merger",
-        thumbnail: "games/Squid Game Merger-512x384.jpg",
-        description: "Challenge your puzzle skills in this addictive Squid Game themed merger! Combine identical items to upgrade and progress through exciting levels inspired by the popular series. With strategic gameplay and increasing difficulty, this merger game will test your matching and planning abilities while providing hours of entertainment.",
-        category: ["puzzle", "casual"],
-        theme: ["cartoon", "challenge"],
-        gameUrl: "https://html5.gamemonetize.co/edaixam7nxogh335w18h1k78h6fe6spn/",
-        iframe: '<iframe src="https://html5.gamemonetize.co/edaixam7nxogh335w18h1k78h6fe6spn/" width="1080" height="1920" scrolling="none" frameborder="0"></iframe>',
-        isFeatured: true,
-        isNew: true,
-        popularity: 92,
-        dateAdded: "2024-07-12",
-        width: 1080,
-        height: 1920,
-        aspectRatio: "9:16",
-        allowFullscreen: true,
-        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
-        requiredPermissions: [],
-        isVertical: true,
-        descriptions: {
-            en: "Challenge your puzzle skills in this addictive Squid Game themed merger! Combine identical items to upgrade and progress through exciting levels inspired by the popular series. With strategic gameplay and increasing difficulty, this merger game will test your matching and planning abilities while providing hours of entertainment.",
-            zh: ""
-        }
-    },
-    {
-        id: "connect-one-line",
-        title: "Connect One Line",
-        thumbnail: "games/Connect One Line-512x384.jpg",
-        description: "Test your logical thinking with this addictive line-drawing puzzle game! Connect dots using a single continuous line without crossing paths. With progressive difficulty levels and elegant design, Connect One Line offers a perfect blend of simplicity and challenge for puzzle enthusiasts. Solve increasingly complex patterns and train your brain with this relaxing yet stimulating game.",
-        category: ["puzzle", "brain"],
-        theme: ["minimalist", "classic"],
-        gameUrl: "https://html5.gamemonetize.co/kii9p1fkvoxg6f37a4mfpht8gilxnjjn/",
-        iframe: '<iframe src="https://html5.gamemonetize.co/kii9p1fkvoxg6f37a4mfpht8gilxnjjn/" width="800" height="600" scrolling="none" frameborder="0"></iframe>',
-        isFeatured: true,
-        isNew: true,
-        popularity: 89,
-        dateAdded: "2024-07-15",
-        width: 800,
-        height: 600,
-        aspectRatio: "4:3",
-        allowFullscreen: true,
-        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
-        requiredPermissions: [],
-        descriptions: {
-            en: "Test your logical thinking with this addictive line-drawing puzzle game! Connect dots using a single continuous line without crossing paths. With progressive difficulty levels and elegant design, Connect One Line offers a perfect blend of simplicity and challenge for puzzle enthusiasts. Solve increasingly complex patterns and train your brain with this relaxing yet stimulating game.",
-            zh: ""
-        }
     }
 ];
 
 // Game Categories
 const gameCategories = {
     "action": "Action Games",
+    "adventure": "Adventure Games",
+    "arcade": "Arcade Games",
+    "board": "Board Games",
+    "card": "Card Games",
+    "casual": "Casual Games",
+    "educational": "Educational Games",
     "puzzle": "Puzzle Games",
     "racing": "Racing Games",
-    "casual": "Casual Games",
-    "shooting": "Shooting Challenges",
+    "shooter": "Shooter Games",
+    "simulation": "Simulation Games",
     "sports": "Sports Games",
-    "multiplayer": "Multiplayer Games"
+    "strategy": "Strategy Games",
+    "survival": "Survival Games",
+    "tower-defense": "Tower Defense Games"
 };
 
 // Game Themes
@@ -800,113 +597,4 @@ function getRelatedGames(gameId, limit = 4) {
     return related
         .sort(() => 0.5 - Math.random())
         .slice(0, limit);
-}
-
-// 更新游戏的分类（示例：更新现有游戏类别）
-// 这段代码需要放在加载游戏数据之后执行
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('[DEBUG] 开始重新分类游戏');
-    
-    // 定义每个游戏适合的新分类
-    const gameNewCategories = {
-        // 原有游戏ID到新分类的映射
-        "kings-io": ["action", "multiplayer"],
-        "sparta-hoppers": ["action", "casual"],
-        "nuts-and-bolts-puzzle": ["puzzle", "casual"],
-        "tank-arena-online": ["action", "multiplayer"],
-        "monster-survivors": ["action", "shooting"],
-        "endless-cyberpunk-runner": ["action", "casual"],
-        "baby-noob-vs-baby-obby-horse": ["action", "casual"],
-        "dye-it-right-color-picker": ["puzzle", "casual"],
-        "hit-and-run-solo-leveling": ["action", "racing"],
-        "deep-in-the-lab": ["puzzle", "casual"],
-        "last-war-survival": ["action", "shooting"],
-        "flappy-twist": ["casual", "action"],
-        "sokoban-puzzle-game": ["puzzle", "casual"],
-        "john-is-a-lifeguard": ["action", "sports"],
-        "flip-master": ["sports", "action"],
-        "ramp-race": ["racing", "sports"],
-        "poppy-playtime-chapter-3": ["puzzle", "casual"],
-        "noodle-stack-runner": ["casual", "puzzle"],
-        "lego-pirate-adventure": ["action", "casual"],
-        "super-mario-and-sonic": ["action", "casual"],
-        "sunny-fields": ["casual", "puzzle"],
-        "animal-puzzle-kids": ["puzzle", "casual"],
-        "merge-fruits-2048": ["puzzle", "casual"],
-        "one-plus-two": ["puzzle", "casual"],
-        "car-racing-adventure": ["racing", "action"],
-        "ice-racing-game": ["racing", "action"],
-        "vertical-adventure-game": ["action", "casual"],
-        "fantasy-tower-defence": ["action", "shooting"],
-        "turkish-draughts": ["puzzle", "casual"],
-        "stack-tower": ["puzzle", "casual"],
-        "voxel-world": ["action", "puzzle"],
-        "extreme-car-driving-parking": ["racing", "casual"],
-        "valentines-day-mahjong": ["puzzle", "casual"],
-        "sprinkle-plants-puzzle-game": ["puzzle", "casual"],
-        "squid-game-merger": ["puzzle", "casual"],
-        "connect-one-line": ["puzzle", "casual"]
-    };
-    
-    // 更新每个游戏的分类
-    if (window.gamesData && Array.isArray(window.gamesData)) {
-        window.gamesData.forEach(game => {
-            if (gameNewCategories[game.id]) {
-                // 用新分类替换旧分类
-                game.category = gameNewCategories[game.id];
-                console.log(`[DEBUG] 更新游戏 ${game.title} 的分类为: ${game.category.join(', ')}`);
-            } else {
-                // 如果没有明确定义新分类，使用基于原有分类的映射
-                let newCategories = [];
-                
-                // 将原有分类映射到新分类系统
-                if (game.category) {
-                    if (game.category.includes('action') || game.category.includes('adventure')) {
-                        newCategories.push('action');
-                    }
-                    if (game.category.includes('puzzle') || game.category.includes('brain')) {
-                        newCategories.push('puzzle');
-                    }
-                    if (game.category.includes('racing')) {
-                        newCategories.push('racing');
-                    }
-                    if (game.category.includes('casual') || game.category.includes('arcade')) {
-                        newCategories.push('casual');
-                    }
-                    if (game.category.includes('shooter') || game.category.includes('tower-defense')) {
-                        newCategories.push('shooting');
-                    }
-                    if (game.category.includes('sports')) {
-                        newCategories.push('sports');
-                    }
-                    
-                    // 检查是否是多人游戏
-                    if (game.description && (
-                        game.description.toLowerCase().includes('multiplayer') || 
-                        game.description.toLowerCase().includes('multi-player') ||
-                        game.description.toLowerCase().includes('online')
-                    )) {
-                        newCategories.push('multiplayer');
-                    }
-                }
-                
-                // 确保每个游戏至少有一个分类
-                if (newCategories.length === 0) {
-                    newCategories.push('casual'); // 默认分类
-                }
-                
-                // 限制最多2个分类
-                if (newCategories.length > 2) {
-                    newCategories = newCategories.slice(0, 2);
-                }
-                
-                game.category = newCategories;
-                console.log(`[DEBUG] 自动分配游戏 ${game.title} 的分类为: ${game.category.join(', ')}`);
-            }
-        });
-        
-        console.log('[DEBUG] 游戏分类更新完成');
-    } else {
-        console.error('[ERROR] 无法找到游戏数据');
-    }
-}); 
+} 

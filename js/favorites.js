@@ -136,18 +136,15 @@ function loadFavoritesIntoContainer(containerId) {
                 <div class="game-thumb-container">
                     <img src="${game.thumbnail}" alt="${game.title}" class="game-thumb">
                     <div class="play-now-overlay">
+                        <div class="game-title-overlay">${game.title}</div>
                         <span class="play-button">Play Now</span>
                     </div>
-                    <button class="favorite-btn active" data-game-id="${game.id}" title="${I18n.getTranslation('gameDetails.removeFromFavorites') || 'Remove from Favorites'}">
+                    <button class="favorite-btn active" data-game-id="${game.id}" title="${I18n.getTranslation('gameDetails.removeFromFavorites') || '移出收藏'}">
                         <i class="fas fa-heart"></i>
                     </button>
-                    <button class="share-btn" data-game-id="${game.id}" title="${I18n.getTranslation('gameDetails.share') || 'Share'}">
+                    <button class="share-btn" data-game-id="${game.id}" title="${I18n.getTranslation('gameDetails.share') || '分享'}">
                         <i class="fas fa-share-alt"></i>
                     </button>
-                </div>
-                <div class="game-info">
-                    <h3 class="game-title">${game.title}</h3>
-                    <p class="game-description">${game.description.substring(0, 80)}${game.description.length > 80 ? '...' : ''}</p>
                 </div>
             `;
             
@@ -157,7 +154,8 @@ function loadFavoritesIntoContainer(containerId) {
                 if (e.target.closest('.favorite-btn') || e.target.closest('.share-btn')) {
                     return;
                 }
-                window.location.href = `game-detail.html?id=${game.id}`;
+                // 在新标签页中打开游戏详情页
+                window.open(`game-detail.html?id=${game.id}`, '_blank', 'noopener,noreferrer');
             });
             
             // Add click event for favorite button

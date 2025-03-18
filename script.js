@@ -134,6 +134,46 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // 验证Voxel World游戏是否已加载
+    const voxelWorldGame = getGameById('voxel-world');
+    if (voxelWorldGame) {
+        console.log('[INFO] Voxel World游戏已成功加载');
+        
+        // 验证游戏已正确分类
+        const strategySection = document.getElementById('strategy-games');
+        const puzzleSection = document.getElementById('puzzle-games');
+        
+        // 检查这些分类区域是否包含该游戏
+        if (strategySection && puzzleSection) {
+            const strategyHasGame = strategySection.querySelector('[data-game-id="voxel-world"]');
+            const puzzleHasGame = puzzleSection.querySelector('[data-game-id="voxel-world"]');
+            
+            console.log('[INFO] Voxel World在策略游戏分类中:', !!strategyHasGame);
+            console.log('[INFO] Voxel World在益智游戏分类中:', !!puzzleHasGame);
+        }
+    } else {
+        console.error('[ERROR] 无法加载Voxel World游戏');
+    }
+
+    // 添加性能优化
+    optimizeImageLoading();
+    
+    // 等页面基本渲染完成后再进行DOM性能优化
+    setTimeout(optimizeDOMPerformance, 1000);
+
+    // 添加搜索功能
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('game-search');
+    
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
 });
 
 // 设置侧边栏分类链接的点击事件
@@ -284,21 +324,38 @@ function fixRelativePaths() {
 
 // 优化图片加载
 function optimizeImageLoading() {
-    // 使用 Intersection Observer API 实现图片懒加载
+    console.log('[DEBUG] 初始化图片懒加载');
+    
+    // 使用原生懒加载属性
+    document.querySelectorAll('img:not([loading])').forEach(img => {
+        img.loading = 'lazy';
+        img.decoding = 'async';
+    });
+    
+    // 使用 Intersection Observer API 实现更高级的图片懒加载
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    if (img.dataset.src) {
+                    
+                    // 处理data-src属性
+                    if (img.dataset.src && !img.src.includes(img.dataset.src)) {
                         img.src = img.dataset.src;
                         img.classList.add('loaded');
-                        observer.unobserve(img);
                     }
+                    
+                    // 处理data-srcset属性
+                    if (img.dataset.srcset) {
+                        img.srcset = img.dataset.srcset;
+                    }
+                    
+                    observer.unobserve(img);
                 }
             });
         }, {
-            rootMargin: '200px 0px'
+            rootMargin: '200px 0px', // 提前200px加载
+            threshold: 0.01 // 只需要1%的元素可见就开始加载
         });
         
         // 监听所有带有 data-src 属性的图片
@@ -306,16 +363,154 @@ function optimizeImageLoading() {
             img.classList.add('lazy-load');
             imageObserver.observe(img);
         });
+        
+        console.log('[DEBUG] 启用Intersection Observer图片懒加载');
     } else {
         // 对于不支持 Intersection Observer 的浏览器，使用传统方法
         document.querySelectorAll('img[data-src]').forEach(img => {
             img.src = img.dataset.src;
         });
+        console.log('[DEBUG] 浏览器不支持Intersection Observer，使用传统图片加载');
     }
 }
 
-// Run preload after window load to prioritize main content first
-window.addEventListener('load', function() {
-    preloadGameThumbnails();
-    optimizeImageLoading();
+// 优化DOM渲染性能
+function optimizeDOMPerformance() {
+    // 减少不必要的DOM重绘
+    document.querySelectorAll('.game-card').forEach(card => {
+        card.style.willChange = 'transform';
+        card.style.transform = 'translateZ(0)'; // 启用GPU加速
+    });
+    
+    // 优化动画性能
+    document.querySelectorAll('.game-thumb-container').forEach(container => {
+        container.style.willChange = 'transform';
+    });
+    
+    console.log('[DEBUG] 已应用DOM性能优化');
+}
+
+// 监听窗口大小变化，优化网格布局
+window.addEventListener('resize', debounce(function() {
+    // 重新调整网格布局
+    const grids = document.querySelectorAll('.games-grid');
+    grids.forEach(grid => {
+        if (grid.children.length > 0) {
+            adjustGridLayout(grid);
+        }
+    });
+    
+    // 调整瀑布流布局
+    const waterfallContainer = document.getElementById('games-waterfall');
+    if (waterfallContainer && window.WaterfallGrid && typeof window.WaterfallGrid.initLayout === 'function') {
+        window.WaterfallGrid.initLayout('games-waterfall');
+    }
+}, 300));
+
+// 防抖函数
+function debounce(func, wait) {
+    let timeout;
+    return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(context, args);
+        }, wait);
+    };
+}
+
+// 调整网格布局
+function adjustGridLayout(container) {
+    const containerWidth = container.clientWidth;
+    const cardWidth = 200; // 基础卡片宽度
+    const minGap = 20; // 最小间距
+    
+    let columns = Math.floor(containerWidth / (cardWidth + minGap));
+    columns = Math.max(1, columns); // 至少1列
+    
+    const gap = Math.floor((containerWidth - (columns * cardWidth)) / columns);
+    
+    container.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+    container.style.gap = `${gap}px`;
+}
+
+// 修改搜索功能，确保搜索结果不重复显示在热门游戏区域
+function performSearch() {
+    const searchInput = document.getElementById('game-search');
+    if (!searchInput) return;
+    
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    const waterfallContainer = document.getElementById('games-waterfall');
+    
+    if (!waterfallContainer) return;
+    
+    // 清空瀑布流容器
+    waterfallContainer.innerHTML = '';
+    
+    if (searchTerm === '') {
+        // 如果搜索词为空，重新加载所有热门游戏（不重复）
+        setupWaterfallGridForPopularGames();
+    } else {
+        // 过滤游戏
+        const filteredGames = window.gamesData.filter(game => 
+            game.title.toLowerCase().includes(searchTerm) || 
+            (game.description && game.description.toLowerCase().includes(searchTerm)) ||
+            (game.descriptions && game.descriptions.zh && game.descriptions.zh.toLowerCase().includes(searchTerm)) ||
+            (game.descriptions && game.descriptions.en && game.descriptions.en.toLowerCase().includes(searchTerm)) ||
+            (game.category && game.category.some(cat => cat.toLowerCase().includes(searchTerm))) ||
+            (game.theme && game.theme.some(theme => theme.toLowerCase().includes(searchTerm))) ||
+            (game.tags && game.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
+        );
+        
+        // 显示过滤后的游戏
+        if (filteredGames.length > 0) {
+            const fragment = document.createDocumentFragment();
+            filteredGames.forEach(game => {
+                const gameCard = createGameCard(game);
+                if (gameCard) {
+                    // 为图片添加懒加载属性
+                    const img = gameCard.querySelector('img');
+                    if (img) {
+                        img.loading = 'lazy';
+                        img.decoding = 'async';
+                    }
+                    fragment.appendChild(gameCard);
+                }
+            });
+            
+            waterfallContainer.appendChild(fragment);
+            
+            // 应用瀑布流布局
+            if (window.WaterfallGrid && typeof window.WaterfallGrid.initLayout === 'function') {
+                window.WaterfallGrid.initLayout('games-waterfall');
+            } else {
+                // 使用CSS grid作为备选方案
+                applyGridLayout(waterfallContainer);
+            }
+        } else {
+            waterfallContainer.innerHTML = 
+                '<div class="no-results">没有找到匹配您搜索的游戏。</div>';
+        }
+    }
+}
+
+// 添加搜索按钮和输入框的事件监听
+document.addEventListener('DOMContentLoaded', function() {
+    // ... 现有代码 ...
+    
+    // 添加搜索功能
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('game-search');
+    
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+    
+    // ... 现有代码 ...
 });
