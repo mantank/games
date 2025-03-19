@@ -575,25 +575,6 @@ let gamesData = [
         requiredPermissions: []
     },
     {
-        id: "stack-tower",
-        title: "Stack Tower",
-        description: "Test your patience, timing, and stacking skills with this addictive game. Stack blocks as high as you can without letting them fall off the tower.",
-        thumbnail: "games/Noodle Stack Runner-512x384.jpg",
-        category: ["skill", "puzzle"],
-        theme: ["challenge"],
-        featured: true,
-        popularity: 89,
-        dateAdded: "2023-07-02",
-        gameUrl: "https://html5.gamepix.com/play/stack-blocks-tower?sid=110312",
-        width: 640,
-        height: 960,
-        aspectRatio: "2:3",
-        allowFullscreen: true,
-        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
-        requiredPermissions: [],
-        isVertical: true
-    },
-    {
         id: "valentines-day-mahjong",
         title: "Valentines Day Mahjong",
         thumbnail: "games/Valentines Day Mahjong-512x384.jpg",
@@ -693,8 +674,13 @@ let gamesData = [
     }
 ];
 
-// 现在这行过滤代码可以正常工作
-gamesData = gamesData.filter(game => game.id !== "voxel-world");
+// 过滤掉 stack-tower 游戏
+gamesData = gamesData.filter(game => game.id !== "stack-tower");
+
+// 不再按照域名批量过滤游戏，改为只过滤特定游戏
+// 下面是已知不可用的游戏ID列表
+const unavailableGameIds = ["voxel-world", "deep-in-the-lab"];
+gamesData = gamesData.filter(game => !unavailableGameIds.includes(game.id));
 
 // Game Categories
 const gameCategories = {
