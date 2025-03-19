@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function initVerticalGameResponsive() {
     // 检查页面URL以确定是否在游戏详情页
-    if (window.location.href.includes('game-detail.html')) {
+    if (window.location.href.includes('game.html')) {
         console.log('[Vertical Game] 在游戏详情页中初始化垂直游戏响应式处理');
         
         // 添加自定义的游戏加载事件监听器

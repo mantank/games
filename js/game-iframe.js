@@ -4,6 +4,90 @@
  */
 
 /**
+ * 垂直游戏响应式模块
+ * 处理垂直游戏的尺寸和响应式布局
+ */
+const VerticalGameResponsive = {
+    /**
+     * 调整垂直游戏容器的尺寸以适应不同的屏幕
+     * @param {HTMLElement} container - 游戏容器元素
+     * @param {Object} game - 游戏对象（可选）
+     */
+    adjustSize: function(container, game) {
+        if (!container) return;
+        
+        // 获取容器当前宽度
+        const containerWidth = container.clientWidth;
+        
+        // 获取游戏的宽高比（如果有）
+        let aspectRatio = 9/16; // 默认垂直宽高比
+        
+        if (game) {
+            if (game.aspectRatio) {
+                const parts = game.aspectRatio.split(':');
+                if (parts.length === 2) {
+                    aspectRatio = parseInt(parts[0], 10) / parseInt(parts[1], 10);
+                }
+            } else if (game.width && game.height) {
+                aspectRatio = game.width / game.height;
+            }
+        }
+        
+        // 计算基于宽高比的理想高度
+        const idealHeight = containerWidth / aspectRatio;
+        
+        // 获取视窗高度的80%作为最大高度限制
+        const maxHeight = window.innerHeight * 0.8;
+        
+        // 设置高度，但不超过最大高度
+        const height = Math.min(idealHeight, maxHeight);
+        
+        // 如果理想高度大于最大高度，需要调整宽度以保持宽高比
+        if (idealHeight > maxHeight) {
+            const adjustedWidth = maxHeight * aspectRatio;
+            container.style.width = `${adjustedWidth}px`;
+            container.style.height = `${maxHeight}px`;
+            container.style.margin = '0 auto';
+        } else {
+            // 否则使用全宽并设置计算的高度
+            container.style.width = '100%';
+            container.style.height = `${height}px`;
+            container.style.margin = '0 auto';
+        }
+        
+        console.log(`[VerticalGameResponsive] 调整大小: 宽度=${container.style.width}, 高度=${container.style.height}, 宽高比=${aspectRatio}`);
+    },
+    
+    /**
+     * 初始化响应式调整
+     * @param {HTMLElement} container - 游戏容器元素
+     * @param {Object} game - 游戏对象
+     */
+    init: function(container, game) {
+        if (!container) return;
+        
+        // 先进行一次调整
+        this.adjustSize(container, game);
+        
+        // 添加窗口大小改变事件监听
+        window.addEventListener('resize', () => {
+            this.adjustSize(container, game);
+        });
+        
+        // 在屏幕方向改变时也进行调整
+        window.addEventListener('orientationchange', () => {
+            // 等待一点时间以确保方向变化完成
+            setTimeout(() => {
+                this.adjustSize(container, game);
+            }, 200);
+        });
+    }
+};
+
+// 将模块暴露给全局，以便其他脚本使用
+window.VerticalGameResponsive = VerticalGameResponsive;
+
+/**
  * Load a game into an iframe with proper security settings
  * @param {Object} game - The game object containing configuration
  * @param {string} containerId - The ID of the container element (default: 'game-iframe-container')
@@ -16,15 +100,12 @@ function loadGameIframe(game, containerId = 'game-iframe-container') {
     }
 
     // 检查是否为垂直游戏，如果是则应用垂直游戏样式
-    if (game.isVertical) {
+    if (game.isVertical || (game.height > game.width) || (game.aspectRatio && game.aspectRatio.includes('9:16'))) {
         iframeContainer.classList.add('vertical-game-iframe-container');
         iframeContainer.classList.remove('game-iframe-container');
         
-        // 在新的垂直游戏响应式脚本加载后，调用其调整尺寸函数
-        if (window.VerticalGameResponsive && typeof window.VerticalGameResponsive.adjustSize === 'function') {
-            console.log('[Game Iframe] 调用垂直游戏自适应尺寸函数');
-            window.VerticalGameResponsive.adjustSize(iframeContainer);
-        }
+        // 初始化垂直游戏响应式模块
+        VerticalGameResponsive.init(iframeContainer, game);
     } else {
         iframeContainer.classList.add('game-iframe-container');
         iframeContainer.classList.remove('vertical-game-iframe-container');

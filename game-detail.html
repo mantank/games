@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Details - Happy Games</title>
     <meta name="description" content="Play free online games on Happy Games - the ultimate cyberpunk gaming portal.">
-    <link rel="canonical" href="https://happygame.help/game-detail.html">
+    <link rel="canonical" href="https://happygame.help/game.html">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -335,7 +335,7 @@
                     return;
                 }
                 // 在新标签页中打开游戏详情页
-                window.open(`game-detail.html?id=${game.id}`, '_blank', 'noopener,noreferrer');
+                window.open(`game.html?id=${game.id}`, '_blank', 'noopener,noreferrer');
             });
             
             // 添加收藏按钮点击事件
@@ -372,7 +372,7 @@
                         navigator.share({
                             title: title,
                             text: `Check out ${title} on Happy Games!`,
-                            url: `${window.location.origin}/game-detail.html?id=${game.id}`
+                            url: `${window.location.origin}/game.html?id=${game.id}`
                         }).catch(err => console.error('Share failed:', err));
                     }
                 });

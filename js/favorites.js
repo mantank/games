@@ -155,7 +155,7 @@ function loadFavoritesIntoContainer(containerId) {
                     return;
                 }
                 // 在新标签页中打开游戏详情页
-                window.open(`game-detail.html?id=${game.id}`, '_blank', 'noopener,noreferrer');
+                window.open(`game.html?id=${game.id}`, '_blank', 'noopener,noreferrer');
             });
             
             // Add click event for favorite button

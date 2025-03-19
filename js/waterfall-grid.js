@@ -230,29 +230,18 @@ function createGameCard(game, index) {
             if (e.target.closest('.favorite-btn') || e.target.closest('.share-btn')) {
                 return;
             }
-            window.open(`game-detail.html?id=${game.id}`, '_blank');
-        });
-    }
-    
-    // 确保游戏卡片上的覆盖层也能导航
-    const playNowOverlay = gameCard.querySelector('.play-now-overlay');
-    if (playNowOverlay) {
-        playNowOverlay.addEventListener('click', (e) => {
-            // 点击收藏或分享按钮时不导航
-            if (e.target.closest('.favorite-btn') || e.target.closest('.share-btn')) {
-                return;
-            }
+            
             // 在新标签页中打开游戏详情页
-            window.open(`game-detail.html?id=${game.id}`, '_blank');
+            window.open(`game.html?id=${game.id}`, '_blank', 'noopener,noreferrer');
         });
     }
     
-    // 单独为Play Now按钮添加点击事件
+    // 修改Play Now按钮的点击事件，使用同一个页面而不是新标签页
     const playNowButton = gameCard.querySelector('.play-now-button');
     if (playNowButton) {
         playNowButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            window.open(`game-detail.html?id=${game.id}`, '_blank');
+            e.stopPropagation(); // 阻止事件冒泡
+            window.open(`game.html?id=${game.id}`, '_blank', 'noopener,noreferrer'); // 在新窗口中打开
         });
     }
     
@@ -357,7 +346,7 @@ function openShareModal(game) {
     }
     
     // Generate share URLs
-    const shareUrl = `${window.location.origin}/game-detail.html?id=${game.id}`;
+    const shareUrl = `${window.location.origin}/game.html?id=${game.id}`;
     const shareTitle = encodeURIComponent(game.title);
     const shareImage = encodeURIComponent(game.thumbnail);
     
@@ -645,12 +634,33 @@ function getPopularWaterfallGames() {
     // 一次性获取所有热门游戏，不再分页
     let popularGames = [];
     
-    if (typeof getFilteredPopularGames === 'function') {
+    if (typeof window.getPopularGames === 'function') {
+        // 优先使用window.getPopularGames函数，确保按照最新游戏、特色游戏和人气排序
+        popularGames = window.getPopularGames();
+    } else if (typeof getFilteredPopularGames === 'function') {
         popularGames = getFilteredPopularGames();
     } else if (typeof gamesData !== 'undefined' && Array.isArray(gamesData)) {
         // 兼容性处理，如果getFilteredPopularGames不可用，则使用原始方法
-        // 确保我们创建一个新数组副本，并按照人气降序排序
-        popularGames = [...gamesData].sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+        // 创建一个新数组副本
+        popularGames = [...gamesData];
+        
+        // 优先级排序：1.新游戏 2.特色游戏 3.人气
+        popularGames.sort((a, b) => {
+            // 新游戏排在最前面（同时支持new和isNew两种属性名）
+            const aNew = a.new || a.isNew;
+            const bNew = b.new || b.isNew;
+            if (aNew && !bNew) return -1;
+            if (!aNew && bNew) return 1;
+            
+            // 特色游戏排在次之（同时支持featured和isFeatured两种属性名）
+            const aFeatured = a.featured || a.isFeatured;
+            const bFeatured = b.featured || b.isFeatured;
+            if (aFeatured && !bFeatured) return -1;
+            if (!aFeatured && bFeatured) return 1;
+            
+            // 最后按人气排序
+            return (b.popularity || 0) - (a.popularity || 0);
+        });
     }
     
     // 确保游戏数据不为空
@@ -668,5 +678,6 @@ window.WaterfallGrid = {
     init: initWaterfallGrid,
     loadGames: loadGames,
     getWaterfallGames: getWaterfallGames,
+    getPopularWaterfallGames: getPopularWaterfallGames,
     openShareModal: openShareModal
 }; 

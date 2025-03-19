@@ -235,12 +235,33 @@
                     console.log('[DEBUG] 找到瀑布流容器，正在初始化...');
                     waterfallContainer.innerHTML = ''; // 清空容器
                     window.WaterfallGrid.init('games-waterfall', function(page, count) {
-                        // 创建游戏数据的副本并按人气排序
-                        if (typeof window.gamesData !== 'undefined' && Array.isArray(window.gamesData)) {
-                            const popularGames = [...window.gamesData].sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+                        // 使用getPopularGames函数获取按新游戏、特色游戏和人气排序的游戏
+                        if (typeof window.getPopularGames === 'function') {
+                            const popularGames = window.getPopularGames();
                             const startIndex = page * count;
                             const endIndex = startIndex + count;
                             console.log(`[DEBUG] 加载热门游戏，第${page+1}页，每页${count}个，总共${popularGames.length}个游戏`);
+                            return popularGames.slice(startIndex, endIndex);
+                        } else if (typeof window.gamesData !== 'undefined' && Array.isArray(window.gamesData)) {
+                            // 兼容性处理，如果getPopularGames不可用，则手动排序
+                            const popularGames = [...window.gamesData].sort((a, b) => {
+                                // 新游戏排在最前面（同时支持new和isNew两种属性名）
+                                const aNew = a.new || a.isNew;
+                                const bNew = b.new || b.isNew;
+                                if (aNew && !bNew) return -1;
+                                if (!aNew && bNew) return 1;
+                                
+                                // 特色游戏排在次之（同时支持featured和isFeatured两种属性名）
+                                const aFeatured = a.featured || a.isFeatured;
+                                const bFeatured = b.featured || b.isFeatured;
+                                if (aFeatured && !bFeatured) return -1;
+                                if (!aFeatured && bFeatured) return 1;
+                                
+                                // 最后按人气排序
+                                return (b.popularity || 0) - (a.popularity || 0);
+                            });
+                            const startIndex = page * count;
+                            const endIndex = startIndex + count;
                             return popularGames.slice(startIndex, endIndex);
                         }
                         return [];
@@ -264,10 +285,18 @@
                     document.getElementById('games-waterfall').innerHTML = '';
                     if (window.WaterfallGrid) {
                         window.WaterfallGrid.init('games-waterfall', function(page, count) {
-                            const popularGames = [...window.gamesData].sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
-                            const startIndex = page * count;
-                            const endIndex = startIndex + count;
-                            return popularGames.slice(startIndex, endIndex);
+                            // 使用getPopularGames函数获取按新游戏、特色游戏和人气排序的游戏
+                            if (typeof window.getPopularGames === 'function') {
+                                const popularGames = window.getPopularGames();
+                                const startIndex = page * count;
+                                const endIndex = startIndex + count;
+                                return popularGames.slice(startIndex, endIndex);
+                            } else {
+                                const popularGames = [...window.gamesData].sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+                                const startIndex = page * count;
+                                const endIndex = startIndex + count;
+                                return popularGames.slice(startIndex, endIndex);
+                            }
                         });
                     }
                 } else {

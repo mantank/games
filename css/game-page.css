@@ -5,6 +5,29 @@
     padding: 20px;
 }
 
+/* Back to Home Button */
+.back-to-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.back-to-home-btn:hover {
+    background-color: #0d8bf2;
+}
+
+.back-to-home-btn i {
+    font-size: 16px;
+}
+
 .game-with-ads-layout {
     display: flex;
     flex-wrap: wrap;
@@ -56,13 +79,17 @@
     margin-bottom: 20px;
 }
 
+/* 游戏框架容器 - 通用样式 */
 .game-frame-container {
     width: 100%;
     height: 0;
-    padding-bottom: 56.25%; /* 16:9 宽高比 */
+    padding-bottom: 56.25%; /* 16:9 宽高比 (默认横屏) */
     position: relative;
+    max-height: 80vh; /* 限制最大高度 */
+    margin: 0 auto;
 }
 
+/* 游戏iframe样式 */
 .game-frame-container iframe {
     position: absolute;
     top: 0;
@@ -70,6 +97,35 @@
     width: 100%;
     height: 100%;
     border: none;
+}
+
+/* 针对垂直游戏的特殊处理 */
+.game-frame-container.vertical-game {
+    max-width: 500px; /* 限制最大宽度 */
+    padding-bottom: 177.78%; /* 9:16 宽高比 (竖屏) */
+    margin: 0 auto;
+}
+
+/* 移动设备上垂直游戏的特殊处理 */
+@media (max-width: 768px) {
+    .game-frame-container.vertical-game {
+        max-width: 100%;
+        padding-bottom: 160%; /* 稍微调整以适应移动设备 */
+    }
+}
+
+/* 小屏幕设备上垂直游戏的特殊处理 */
+@media (max-width: 480px) {
+    .game-frame-container.vertical-game {
+        padding-bottom: 150%; /* 在小屏幕上进一步调整 */
+    }
+}
+
+/* 确保竖屏游戏在大屏幕上不会过大 */
+@media (min-width: 1200px) {
+    .game-frame-container.vertical-game {
+        max-width: 450px;
+    }
 }
 
 .game-loading {
@@ -198,7 +254,38 @@
     }
 }
 
-/* 针对垂直游戏的特殊处理 */
-.game-frame-container.vertical-game {
-    padding-bottom: 160%; /* 适合垂直游戏的高度 */
+/* 垂直游戏容器特定样式 */
+.vertical-game-iframe-container {
+    position: relative;
+    max-width: 450px;
+    margin: 0 auto;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.vertical-game-iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* 在移动设备上扩展垂直游戏容器 */
+@media (max-width: 768px) {
+    .vertical-game-iframe-container {
+        max-width: 100%;
+        height: auto !important;
+        min-height: 300px;
+    }
+}
+
+/* 在小屏设备上调整尺寸 */
+@media (max-width: 480px) {
+    .vertical-game-iframe-container {
+        min-height: 400px;
+    }
 } 

@@ -128,9 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('[ERROR] 无法找到Voxel World游戏数据');
         }
     }, 1000); // 延迟1秒后检查，确保页面已完全加载
-    
-    // 添加游戏检测功能
-    setTimeout(addGameCheckButton, 1000);
 });
 
 /**
@@ -286,12 +283,19 @@ function getFilteredCategoryGames(category) {
     
     // 按照特色和人气对游戏进行排序
     const sortedGames = [...allCategoryGames].sort((a, b) => {
-        // 特色游戏排在前面（同时支持featured和isFeatured两种属性名）
+        // 新游戏排在最前面（同时支持new和isNew两种属性名）
+        const aNew = a.new || a.isNew;
+        const bNew = b.new || b.isNew;
+        if (aNew && !bNew) return -1;
+        if (!aNew && bNew) return 1;
+        
+        // 特色游戏排在次之（同时支持featured和isFeatured两种属性名）
         const aFeatured = a.featured || a.isFeatured;
         const bFeatured = b.featured || b.isFeatured;
         if (aFeatured && !bFeatured) return -1;
         if (!aFeatured && bFeatured) return 1;
-        // 然后按人气排序
+        
+        // 最后按人气排序
         return (b.popularity || 0) - (a.popularity || 0);
     });
     
@@ -356,7 +360,7 @@ function createGameCard(game) {
         });
     
     card.innerHTML = `
-        <a href="game.html?id=${game.id}" class="game-thumb-container">
+        <a href="game.html?id=${game.id}" target="_blank" rel="noopener noreferrer" class="game-thumb-container">
             <img src="${game.thumbnail}" alt="${game.title}" loading="lazy" class="game-thumb">
             <div class="game-info-overlay">
                 <div class="game-title">${game.title}</div>
@@ -496,8 +500,28 @@ window.HomepageGenerator = {
  * @returns {Array} - Filtered array of game objects
  */
 function getFilteredPopularGames() {
-    // 流行游戏不受已显示游戏的限制，可以显示全部游戏
-    return getPopularGames();
+    // 获取所有游戏数据并按优先级排序
+    let games = [...window.gamesData];
+    
+    // 优先级排序：1.新游戏 2.特色游戏 3.人气
+    games.sort((a, b) => {
+        // 新游戏排在最前面（同时支持new和isNew两种属性名）
+        const aNew = a.new || a.isNew;
+        const bNew = b.new || b.isNew;
+        if (aNew && !bNew) return -1;
+        if (!aNew && bNew) return 1;
+        
+        // 特色游戏排在次之（同时支持featured和isFeatured两种属性名）
+        const aFeatured = a.featured || a.isFeatured;
+        const bFeatured = b.featured || b.isFeatured;
+        if (aFeatured && !bFeatured) return -1;
+        if (!aFeatured && bFeatured) return 1;
+        
+        // 最后按人气排序
+        return (b.popularity || 0) - (a.popularity || 0);
+    });
+    
+    return games;
 }
 
 /**
@@ -624,32 +648,20 @@ function setupWaterfallGridForPopularGames() {
     }
 }
 
-// 更强大的游戏可用性检查函数
+// 添加游戏可用性检查函数
 async function checkGameAvailability(gameUrl) {
-    if (!gameUrl) return false;
-    
     try {
-        // 不再自动判断gamemonetize.co域名为不可用
-        /* 删除这段代码
-        // 检测URL是否包含已知不可用的域名
-        if (gameUrl.includes('gamemonetize.co')) {
-            console.warn(`[游戏可用性检查] ${gameUrl}: 域名不可用 (gamemonetize.co)`);
-            return false;
-        }
-        */
-        
         const response = await fetch(gameUrl, {
             method: 'HEAD',
-            mode: 'no-cors',
-            cache: 'no-store',
-            timeout: 5000
-        }).catch(() => null);
+            mode: 'no-cors'
+        });
         
-        const isAvailable = response && (response.ok || response.status === 0);
-        console.log(`[游戏可用性检查] ${gameUrl}: ${isAvailable ? '可用' : '不可用'}`);
+        // 添加日志记录
+        console.log(`[游戏可用性检查] ${gameUrl}: ${response.ok ? '可用' : '不可用'}`);
         
-        return isAvailable;
+        return response.ok;
     } catch (error) {
+        // 添加错误日志
         console.error(`[游戏可用性检查失败] ${gameUrl}:`, error);
         return false;
     }
@@ -665,305 +677,5 @@ function handleGameLoadError(gameId) {
             errorMessage.style.display = 'block';
         }
         gameCard.classList.add('game-load-error');
-    }
-}
-
-// 添加游戏检测功能
-function checkAllGamesAvailability() {
-    console.log('开始检测所有游戏...');
-    
-    // 创建检测结果容器
-    const resultsContainer = document.createElement('div');
-    resultsContainer.id = 'games-check-results';
-    resultsContainer.className = 'games-check-results';
-    resultsContainer.style.position = 'fixed';
-    resultsContainer.style.top = '20px';
-    resultsContainer.style.right = '20px';
-    resultsContainer.style.width = '300px';
-    resultsContainer.style.maxHeight = '80vh';
-    resultsContainer.style.overflowY = 'auto';
-    resultsContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    resultsContainer.style.color = '#fff';
-    resultsContainer.style.padding = '15px';
-    resultsContainer.style.borderRadius = '8px';
-    resultsContainer.style.zIndex = '9999';
-    resultsContainer.style.boxShadow = '0 0 10px rgba(0, 255, 255, 0.5)';
-    resultsContainer.innerHTML = '<h3>游戏检测结果</h3><p>正在检测游戏可用性...</p>';
-    document.body.appendChild(resultsContainer);
-    
-    // 检测结果计数
-    let totalGames = window.gamesData.length;
-    let checkedGames = 0;
-    let availableGames = 0;
-    let unavailableGames = [];
-    
-    // 更新状态显示
-    function updateResults() {
-        resultsContainer.innerHTML = `
-            <h3>游戏检测结果</h3>
-            <p>总游戏数: ${totalGames}</p>
-            <p>已检测: ${checkedGames}</p>
-            <p>可访问: ${availableGames}</p>
-            <p>不可访问: ${unavailableGames.length}</p>
-            ${unavailableGames.length > 0 ? '<h4>不可访问的游戏:</h4>' : ''}
-            <ul>${unavailableGames.map(game => `<li>${game.title} (${game.id})</li>`).join('')}</ul>
-        `;
-    }
-    
-    // 检测单个游戏
-    async function checkGame(game) {
-        try {
-            // 检测URL是否可访问
-            const response = await fetch(game.gameUrl, {
-                method: 'HEAD',
-                mode: 'no-cors',
-                cache: 'no-store',
-                timeout: 5000
-            }).catch(() => null);
-            
-            // 更新计数
-            checkedGames++;
-            
-            // 判断游戏是否可用
-            const isAvailable = response && (response.ok || response.status === 0);
-            if (isAvailable) {
-                availableGames++;
-                console.log(`[游戏检测] ✅ ${game.title} (${game.id}) 可访问`);
-            } else {
-                unavailableGames.push(game);
-                console.log(`[游戏检测] ❌ ${game.title} (${game.id}) 不可访问`);
-            }
-            
-            // 更新结果显示
-            updateResults();
-            
-            return isAvailable;
-        } catch (error) {
-            console.error(`[游戏检测] 错误: ${game.title} (${game.id})`, error);
-            checkedGames++;
-            unavailableGames.push(game);
-            updateResults();
-            return false;
-        }
-    }
-    
-    // 分批检测游戏
-    async function checkGamesBatch(gamesList, batchSize = 5) {
-        for (let i = 0; i < gamesList.length; i += batchSize) {
-            const batch = gamesList.slice(i, i + batchSize);
-            await Promise.all(batch.map(game => checkGame(game)));
-        }
-        
-        // 检测完成
-        console.log('[游戏检测] 检测完成!');
-        resultsContainer.innerHTML += '<p><strong>检测完成!</strong></p>';
-        
-        // 添加关闭按钮
-        const closeButton = document.createElement('button');
-        closeButton.textContent = '关闭';
-        closeButton.style.padding = '8px 15px';
-        closeButton.style.marginTop = '10px';
-        closeButton.style.backgroundColor = '#2196F3';
-        closeButton.style.color = 'white';
-        closeButton.style.border = 'none';
-        closeButton.style.borderRadius = '4px';
-        closeButton.style.cursor = 'pointer';
-        closeButton.onclick = () => resultsContainer.remove();
-        resultsContainer.appendChild(closeButton);
-    }
-    
-    // 开始检测
-    if (window.gamesData && window.gamesData.length > 0) {
-        checkGamesBatch(window.gamesData);
-    } else {
-        resultsContainer.innerHTML = '<h3>游戏检测结果</h3><p>无游戏数据可检测</p>';
-    }
-}
-
-// 添加游戏检测按钮
-function addGameCheckButton() {
-    const buttonContainer = document.createElement('div');
-    buttonContainer.style.position = 'fixed';
-    buttonContainer.style.bottom = '20px';
-    buttonContainer.style.right = '20px';
-    buttonContainer.style.zIndex = '9999';
-    buttonContainer.style.display = 'flex';
-    buttonContainer.style.flexDirection = 'column';
-    buttonContainer.style.gap = '10px';
-    
-    // 检测所有游戏按钮
-    const checkAllButton = document.createElement('button');
-    checkAllButton.textContent = '检测所有游戏';
-    checkAllButton.style.padding = '10px 20px';
-    checkAllButton.style.backgroundColor = 'var(--neon-blue)';
-    checkAllButton.style.color = 'white';
-    checkAllButton.style.border = 'none';
-    checkAllButton.style.borderRadius = '4px';
-    checkAllButton.style.cursor = 'pointer';
-    checkAllButton.style.boxShadow = '0 0 10px rgba(0, 255, 255, 0.5)';
-    checkAllButton.onclick = checkAllGamesAvailability;
-    
-    // 生成黑名单按钮
-    const generateBlacklistButton = document.createElement('button');
-    generateBlacklistButton.textContent = '生成不可用游戏列表';
-    generateBlacklistButton.style.padding = '10px 20px';
-    generateBlacklistButton.style.backgroundColor = 'var(--neon-pink)';
-    generateBlacklistButton.style.color = 'white';
-    generateBlacklistButton.style.border = 'none';
-    generateBlacklistButton.style.borderRadius = '4px';
-    generateBlacklistButton.style.cursor = 'pointer';
-    generateBlacklistButton.style.boxShadow = '0 0 10px rgba(255, 0, 255, 0.5)';
-    generateBlacklistButton.onclick = generateUnavailableGamesList;
-    
-    buttonContainer.appendChild(checkAllButton);
-    buttonContainer.appendChild(generateBlacklistButton);
-    document.body.appendChild(buttonContainer);
-}
-
-// 生成不可用游戏列表
-async function generateUnavailableGamesList() {
-    // 显示正在检测的提示
-    const resultsContainer = document.createElement('div');
-    resultsContainer.id = 'games-check-results';
-    resultsContainer.className = 'games-check-results';
-    resultsContainer.style.position = 'fixed';
-    resultsContainer.style.top = '20px';
-    resultsContainer.style.right = '20px';
-    resultsContainer.style.width = '500px';
-    resultsContainer.style.maxHeight = '80vh';
-    resultsContainer.style.overflowY = 'auto';
-    resultsContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    resultsContainer.style.color = '#fff';
-    resultsContainer.style.padding = '15px';
-    resultsContainer.style.borderRadius = '8px';
-    resultsContainer.style.zIndex = '9999';
-    resultsContainer.style.boxShadow = '0 0 10px rgba(255, 0, 255, 0.5)';
-    resultsContainer.innerHTML = '<h3>正在检测游戏可用性...</h3><p>请稍候，这可能需要一些时间</p>';
-    document.body.appendChild(resultsContainer);
-    
-    // 检测结果计数
-    let totalGames = window.gamesData.length;
-    let checkedGames = 0;
-    let unavailableGames = [];
-    
-    // 更新状态显示
-    function updateResults() {
-        resultsContainer.innerHTML = `
-            <h3>游戏检测结果</h3>
-            <p>总游戏数: ${totalGames}</p>
-            <p>已检测: ${checkedGames}</p>
-            <p>不可用: ${unavailableGames.length}</p>
-        `;
-        
-        if (unavailableGames.length > 0) {
-            resultsContainer.innerHTML += `
-                <h4>不可用的游戏列表:</h4>
-                <div class="code-block">
-                    <pre>// 不可用游戏ID列表
-const unavailableGameIds = [
-${unavailableGames.map(game => `    "${game.id}", // ${game.title}`).join('\n')}
-];</pre>
-                </div>
-                <p>复制上面的代码添加到games-data.js文件中</p>
-            `;
-            
-            // 添加复制按钮
-            const copyButton = document.createElement('button');
-            copyButton.textContent = '复制代码';
-            copyButton.style.padding = '8px 15px';
-            copyButton.style.marginTop = '10px';
-            copyButton.style.backgroundColor = '#4CAF50';
-            copyButton.style.color = 'white';
-            copyButton.style.border = 'none';
-            copyButton.style.borderRadius = '4px';
-            copyButton.style.cursor = 'pointer';
-            copyButton.onclick = () => {
-                const codeText = `// 不可用游戏ID列表
-const unavailableGameIds = [
-${unavailableGames.map(game => `    "${game.id}", // ${game.title}`).join('\n')}
-];`;
-                navigator.clipboard.writeText(codeText)
-                    .then(() => {
-                        copyButton.textContent = '已复制';
-                        setTimeout(() => {
-                            copyButton.textContent = '复制代码';
-                        }, 2000);
-                    })
-                    .catch(err => {
-                        console.error('复制失败:', err);
-                        copyButton.textContent = '复制失败';
-                    });
-            };
-            resultsContainer.appendChild(copyButton);
-        }
-        
-        // 添加关闭按钮
-        const closeButton = document.createElement('button');
-        closeButton.textContent = '关闭';
-        closeButton.style.padding = '8px 15px';
-        closeButton.style.marginTop = '10px';
-        closeButton.style.marginLeft = '10px';
-        closeButton.style.backgroundColor = '#f44336';
-        closeButton.style.color = 'white';
-        closeButton.style.border = 'none';
-        closeButton.style.borderRadius = '4px';
-        closeButton.style.cursor = 'pointer';
-        closeButton.onclick = () => resultsContainer.remove();
-        resultsContainer.appendChild(closeButton);
-    }
-    
-    // 检测单个游戏
-    async function checkGame(game) {
-        try {
-            // 检测URL是否可访问
-            const response = await fetch(game.gameUrl, {
-                method: 'HEAD',
-                mode: 'no-cors',
-                cache: 'no-store',
-                timeout: 5000
-            }).catch(() => null);
-            
-            // 更新计数
-            checkedGames++;
-            
-            // 判断游戏是否可用
-            const isAvailable = response && (response.ok || response.status === 0);
-            if (!isAvailable) {
-                unavailableGames.push(game);
-                console.log(`[游戏检测] ❌ ${game.title} (${game.id}) 不可访问`);
-            }
-            
-            // 更新结果显示
-            updateResults();
-            
-            return isAvailable;
-        } catch (error) {
-            console.error(`[游戏检测] 错误: ${game.title} (${game.id})`, error);
-            checkedGames++;
-            unavailableGames.push(game);
-            updateResults();
-            return false;
-        }
-    }
-    
-    // 分批检测游戏
-    async function checkGamesBatch(gamesList, batchSize = 5) {
-        for (let i = 0; i < gamesList.length; i += batchSize) {
-            const batch = gamesList.slice(i, i + batchSize);
-            await Promise.all(batch.map(game => checkGame(game)));
-        }
-        
-        // 检测完成
-        console.log('[游戏检测] 不可用游戏列表生成完成!');
-        
-        // 更新最终结果
-        updateResults();
-    }
-    
-    // 开始检测
-    if (window.gamesData && window.gamesData.length > 0) {
-        checkGamesBatch(window.gamesData);
-    } else {
-        resultsContainer.innerHTML = '<h3>游戏检测结果</h3><p>无游戏数据可检测</p>';
     }
 } 

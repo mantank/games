@@ -23,6 +23,26 @@ let gamesData = [
     }
     */
     {
+        id: "tower-defense-2",
+        title: "Tower Defense 2",
+        description: "Defend your territory from waves of enemies in this strategic tower defense game! Place defensive towers strategically, upgrade your defenses, and defeat increasingly challenging enemies. With multiple tower types, diverse enemy units, and exciting gameplay mechanics, Tower Defense 2 offers an engaging experience that will test your tactical thinking and resource management skills. Can you hold the line and emerge victorious against all odds?",
+        thumbnail: "games/Tower Defense 2-512x384.jpg",
+        category: ["strategy", "shooting"],
+        theme: ["fantasy", "adventure"],
+        isFeatured: true,
+        isNew: true,
+        popularity: 95,
+        dateAdded: "2024-03-19",
+        gameUrl: "https://html5.gamemonetize.co/1qnr0tgqxtj2w2adiuxs160rv414ywym/",
+        width: 768,
+        height: 1280,
+        aspectRatio: "9:16",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: [],
+        isVertical: true
+    },
+    {
         id: "kings-io",
         title: "Kings IO",
         description: "Battle for the crown in this intense multiplayer io game! Control your royal character, collect gems to grow stronger, and defeat other players to claim their territory. With strategic gameplay, power-ups, and a constantly evolving battlefield, Kings IO offers endless competition and excitement. Upgrade your abilities, form alliances, and dominate the kingdom to become the ultimate ruler. Can you rise to the top of the leaderboard and maintain your reign as the mightiest king?",
@@ -671,6 +691,352 @@ let gamesData = [
             en: "Test your logical thinking with this addictive line-drawing puzzle game! Connect dots using a single continuous line without crossing paths. With progressive difficulty levels and elegant design, Connect One Line offers a perfect blend of simplicity and challenge for puzzle enthusiasts. Solve increasingly complex patterns and train your brain with this relaxing yet stimulating game.",
             zh: ""
         }
+    },
+    {
+        id: "toca-teens-cozy-couture",
+        title: "Toca Teens Cozy Couture",
+        description: "Design stylish outfits and express your fashion creativity in this cozy couture game! Dress up characters with trendy clothes, accessories, and hairstyles. Create unique fashion combinations for different occasions and share your designs. With a wide selection of fashion items and customization options, you can unleash your inner fashion designer and create the perfect look for every character.",
+        thumbnail: "games/Toca Teens Cozy Couture-512x384.jpg",
+        category: ["casual", "puzzle"],
+        theme: ["cartoon"],
+        isFeatured: true,
+        isNew: true,
+        popularity: 93,
+        dateAdded: "2024-03-19",
+        gameUrl: "https://html5.gamemonetize.co/ou7g6mh68kgcsmwxmnfy5cnd2cyex2yu/",
+        width: 800,
+        height: 600,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "baby-hospital-dentist-caring",
+        title: "Baby Hospital Dentist Caring",
+        description: "Take care of adorable patients in this fun dental care simulation! Play as a dentist and treat various dental issues, clean teeth, and make your little patients smile again. Learn about dental hygiene and healthcare in an entertaining way. With simple controls and cheerful graphics, this game offers an enjoyable experience for players who like caring and simulation games.",
+        thumbnail: "games/Baby Hospital Dentist Caring-512x384.jpg",
+        category: ["casual", "puzzle"],
+        theme: ["cartoon"],
+        isFeatured: true,
+        isNew: true,
+        popularity: 90,
+        dateAdded: "2024-03-19",
+        gameUrl: "https://html5.gamemonetize.co/tmv2rbnfkzs1ewg83bhfvo42dy31a20h/",
+        width: 720,
+        height: 1280,
+        aspectRatio: "9:16",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: [],
+        isVertical: true
+    },
+    {
+        id: "toka-boka-home-clean-up-design",
+        title: "Toka Boka Home Clean Up Design",
+        description: "Transform messy houses into beautiful homes in this satisfying clean-up and design game! Clean dirty rooms, arrange furniture, and decorate spaces with stylish items. Complete various cleaning challenges and design tasks to create the perfect living space. With multiple house areas to renovate and numerous design options, you'll enjoy hours of creative gameplay and home transformation fun.",
+        thumbnail: "games/Toka Boka Home Clean Up Design-512x384.jpg",
+        category: ["casual", "puzzle"],
+        theme: ["cartoon"],
+        isFeatured: true,
+        isNew: true,
+        popularity: 92,
+        dateAdded: "2024-03-19",
+        gameUrl: "https://html5.gamemonetize.co/0o6k0n4cxr5fdvxv4mv74x2py8kl6ock/",
+        width: 1024,
+        height: 768,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "hoop-master-basketball-trivia-challenge",
+        title: "Hoop Master Basketball Trivia Challenge",
+        description: "Test your basketball knowledge and shooting skills in this exciting trivia challenge! Answer questions correctly to earn chances to shoot hoops and score points. Perfect for basketball fans and trivia enthusiasts alike.",
+        thumbnail: "games/Hoop Master Basketball Trivia Challenge-512x384.jpg",
+        category: ["sports", "puzzle"],
+        theme: ["casual"],
+        gameUrl: "https://html5.gamemonetize.co/q7mqysmx6prgpafi1wwcwhcqmjg0yf2u/",
+        isFeatured: true,
+        isNew: true,
+        popularity: 85,
+        dateAdded: "2024-05-01",
+        width: 800,
+        height: 600,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "killer-escape-huggy-extreme",
+        title: "Killer Escape Huggy Extreme",
+        description: "Can you escape the clutches of a terrifying creature in this heart-pounding adventure? Navigate through dangerous environments, solve puzzles, and use your wits to survive in this thrilling escape game.",
+        thumbnail: "games/Killer Escape Huggy Extreme-512x384.jpg",
+        category: ["action", "puzzle"],
+        theme: ["horror"],
+        gameUrl: "https://html5.gamemonetize.co/7o3xd5dqvi8ln4ik5fo57ydjx2p6m9ch/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 88,
+        dateAdded: "2024-05-01",
+        width: 800,
+        height: 600,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "screw-master-3d-pin-puzzle",
+        title: "Screw Master 3D Pin Puzzle",
+        description: "Test your spatial reasoning skills in this addictive 3D puzzle game! Rotate and align screws correctly to solve increasingly challenging puzzles. With intuitive controls and satisfying mechanics, this game offers hours of brain-teasing fun.",
+        thumbnail: "games/Screw Master 3D  Pin Puzzle-512x384.jpg",
+        category: ["puzzle", "casual"],
+        theme: ["minimalist"],
+        gameUrl: "https://html5.gamemonetize.co/7kzc77ikesq2bdej5ip6ecevhvsfyqsq/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 82,
+        dateAdded: "2024-05-01",
+        width: 1080,
+        height: 1920,
+        isVertical: true,
+        aspectRatio: "9:16",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "bubblehead-ball",
+        title: "Bubblehead Ball",
+        description: "Bounce and pop your way through this fun, physics-based bubble game! Control your bubble character, avoid obstacles, and collect items to progress through colorful levels. With simple controls but challenging gameplay, this bubbly adventure offers plenty of entertainment for players of all ages.",
+        thumbnail: "games/Bubblehead Ball-512x384.jpg",
+        category: ["casual", "action"],
+        theme: ["cartoon"],
+        gameUrl: "https://html5.gamemonetize.co/ysbytklgjo3e7env48fjrkw9g44409wb/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 80,
+        dateAdded: "2024-05-01",
+        width: 800,
+        height: 600,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "flappy-roblox-obbi",
+        title: "Flappy Roblox Obbi",
+        description: "Navigate your character through challenging obstacle courses in this addictive platformer! Jump, dodge, and maneuver through increasingly difficult levels inspired by popular obstacle games. Test your reflexes and timing as you aim for the highest score in this fast-paced adventure.",
+        thumbnail: "games/Flappy Roblox Obbi -512x384.jpg",
+        category: ["action", "casual"],
+        theme: ["cartoon"],
+        gameUrl: "https://html5.gamemonetize.co/jlzr621vbyjm30yc2fkj4oz18hu9tivq/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 84,
+        dateAdded: "2024-05-01",
+        width: 540,
+        height: 960,
+        isVertical: true,
+        aspectRatio: "9:16",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "stickman-ghost-online",
+        title: "Stickman Ghost Online",
+        description: "Battle as a supernatural stickman warrior in this action-packed adventure! Wield mystical weapons, unleash powerful abilities, and defeat hordes of enemies as you navigate through shadowy realms. With fluid combat mechanics and strategic gameplay, this ghostly stickman game offers an exciting combat experience.",
+        thumbnail: "games/Stickman Ghost Online-512x384.jpg",
+        category: ["action", "shooting"],
+        theme: ["fantasy"],
+        gameUrl: "https://html5.gamemonetize.co/qsd2h427rg6z6gza2xekqsdwgk1dwksa/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 86,
+        dateAdded: "2024-05-01",
+        width: 800,
+        height: 600,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "squid-game-green-light-red-light-hints",
+        title: "Squid Game Green Light Red Light Hints",
+        description: "Test your timing and nerves in this thrilling game inspired by the popular survival series! Move forward during 'green light' and freeze during 'red light' to avoid elimination. With increasing difficulty levels and strategic gameplay, this suspenseful challenge will keep you on the edge of your seat.",
+        thumbnail: "games/Squid Game Green Light Red Light Hints-512x384.jpg",
+        category: ["action", "casual"],
+        theme: ["horror"],
+        gameUrl: "https://html5.gamemonetize.co/etp56l9axninm4hfoue23ndqkvbpkho2/",
+        isFeatured: true,
+        isNew: true,
+        popularity: 92,
+        dateAdded: "2024-05-01",
+        width: 800,
+        height: 600,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "teen-titans-go-swamp-attack",
+        title: "Teen Titans Go Swamp Attack",
+        description: "Join your favorite teen heroes in this action-packed swamp adventure! Defend against waves of swamp creatures using each character's unique abilities and teamwork. With colorful graphics and exciting gameplay inspired by the popular cartoon series, this game offers fun combat action for fans of all ages.",
+        thumbnail: "games/Teen Titans Go   Swamp Attack-512x384.jpg",
+        category: ["action", "shooting"],
+        theme: ["cartoon"],
+        gameUrl: "https://html5.gamemonetize.co/3cy0vt0b9kfq8mb29luamene4htepa2y/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 87,
+        dateAdded: "2024-05-01",
+        width: 800,
+        height: 600,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "noob-vs-zombie-2",
+        title: "Noob vs Zombie 2",
+        description: "Battle hordes of undead in this action-packed zombie shooter sequel! Upgrade your weapons, improve your skills, and defend against increasingly difficult waves of zombies. With multiple levels, diverse enemies, and strategic gameplay, this survival shooter offers an intense challenge for players looking to test their combat skills.",
+        thumbnail: "games/Noob vs Zombie 2-512x384.jpg",
+        category: ["shooting", "action"],
+        theme: ["horror"],
+        gameUrl: "https://html5.gamemonetize.co/mjcgbzq9z7xfzzwgsb15a1g3vn3r4m8t/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 85,
+        dateAdded: "2024-05-01",
+        width: 1280,
+        height: 720,
+        aspectRatio: "16:9",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "spra-racing-cars-speed",
+        title: "Spra Racing Cars Speed",
+        description: "Get behind the wheel in this high-octane racing experience! Race against competitors on challenging tracks, upgrade your vehicles, and master difficult driving conditions. With realistic physics, multiple car options, and diverse racing environments, this racing game delivers adrenaline-pumping action for speed enthusiasts.",
+        thumbnail: "games/Spra racing cars speed-512x384.jpg",
+        category: ["racing", "sports"],
+        theme: ["casual"],
+        gameUrl: "https://html5.gamemonetize.co/jwx14okwfi4va1emp0ofinr8xtlg6lr4/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 83,
+        dateAdded: "2024-05-01",
+        width: 800,
+        height: 600,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "fastlane-road-to-revenge",
+        title: "Fastlane Road to Revenge",
+        description: "Race through traffic-filled streets in this high-octane driving game! Dodge obstacles, collect power-ups, and outrun your pursuers as you seek revenge on the road. With sleek graphics, responsive controls, and escalating challenges, this fast-paced racing adventure will test your reflexes and driving skills.",
+        thumbnail: "games/Fastlane  Road to Revenge-512x384.jpg",
+        category: ["racing", "action"],
+        theme: ["casual"],
+        gameUrl: "https://html5.gamemonetize.co/lnquy874mrycj5mcqmp6vtmxa63qvjvg/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 87,
+        dateAdded: "2024-05-10",
+        width: 800,
+        height: 600,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "miner-dash",
+        title: "Miner Dash",
+        description: "Dig deep into the earth in this exciting mining adventure! Collect valuable gems, avoid dangerous obstacles, and upgrade your mining equipment as you explore increasingly challenging caverns. With simple controls but strategic depth, this addictive game offers hours of subterranean fun for players of all ages.",
+        thumbnail: "games/Miner Dash-512x384.jpg",
+        category: ["casual", "action"],
+        theme: ["adventure"],
+        gameUrl: "https://html5.gamemonetize.co/2mtyeefch9ddhxz9in65ortz1pj122j4/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 83,
+        dateAdded: "2024-05-10",
+        width: 800,
+        height: 600,
+        aspectRatio: "4:3",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "redboy-and-bluegirl",
+        title: "RedBoy and BlueGirl",
+        description: "Control two characters with unique abilities in this clever cooperative puzzle platformer! Navigate through challenging levels by switching between RedBoy and BlueGirl, each with their own special powers and limitations. Work together to overcome obstacles, solve puzzles, and reach the exit in this charming adventure that tests both your reflexes and problem-solving skills.",
+        thumbnail: "games/RedBoy and BlueGirl-512x384.jpg",
+        category: ["puzzle", "action"],
+        theme: ["adventure"],
+        gameUrl: "https://html5.gamemonetize.co/dtzfne60s2a6so3csew9x2t9dby1v9h9/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 85,
+        dateAdded: "2024-05-10",
+        width: 960,
+        height: 600,
+        aspectRatio: "16:10",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "maritime-sniper",
+        title: "Maritime Sniper",
+        description: "Take your position as an elite maritime sniper in this intense shooting game! Complete challenging missions on the high seas, eliminate targets with precision, and upgrade your weapons and equipment. With realistic sniper mechanics, tactical gameplay, and varied mission objectives, this game offers an immersive shooting experience for fans of precision marksmanship.",
+        thumbnail: "games/Maritime Sniper-512x384.jpg",
+        category: ["shooting", "action"],
+        theme: ["realistic"],
+        gameUrl: "https://html5.gamemonetize.co/eixq9hven9curv50dromq9ma2oggllnz/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 86,
+        dateAdded: "2024-05-10",
+        width: 720,
+        height: 1280,
+        isVertical: true,
+        aspectRatio: "9:16",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
+    },
+    {
+        id: "baby-supermarket",
+        title: "Baby Supermarket",
+        description: "Experience the fun of shopping with this adorable baby supermarket game! Help the cute baby character fill their shopping cart with groceries, toys, and other items while learning about different products. With colorful graphics, simple controls, and engaging gameplay, this delightful simulation is perfect for young players or anyone who enjoys casual, lighthearted games.",
+        thumbnail: "games/Baby Supermarket-512x384.jpg",
+        category: ["casual", "puzzle"],
+        theme: ["cartoon"],
+        gameUrl: "https://html5.gamemonetize.co/ktfpwrbnew5vy6my760zgxg0enjo5eqp/",
+        isFeatured: false,
+        isNew: true,
+        popularity: 82,
+        dateAdded: "2024-05-10",
+        width: 800,
+        height: 504,
+        aspectRatio: "16:10",
+        allowFullscreen: true,
+        sandboxOptions: "allow-scripts allow-same-origin allow-popups",
+        requiredPermissions: []
     }
 ];
 
@@ -730,9 +1096,28 @@ function getNewGames() {
     return gamesData.filter(game => game.new || game.isNew);
 }
 
-// Get popular games (sorted by popularity)
+// Get popular games (sorted by new status, featured status, and popularity)
 function getPopularGames() {
-    return [...gamesData].sort((a, b) => b.popularity - a.popularity);
+    // 创建游戏数据的副本
+    const games = [...gamesData];
+    
+    // 优先级排序：1.新游戏 2.特色游戏 3.人气
+    return games.sort((a, b) => {
+        // 新游戏排在最前面（同时支持new和isNew两种属性名）
+        const aNew = a.new || a.isNew;
+        const bNew = b.new || b.isNew;
+        if (aNew && !bNew) return -1;
+        if (!aNew && bNew) return 1;
+        
+        // 特色游戏排在次之（同时支持featured和isFeatured两种属性名）
+        const aFeatured = a.featured || a.isFeatured;
+        const bFeatured = b.featured || b.isFeatured;
+        if (aFeatured && !bFeatured) return -1;
+        if (!aFeatured && bFeatured) return 1;
+        
+        // 最后按人气排序
+        return (b.popularity || 0) - (a.popularity || 0);
+    });
 }
 
 // Get related games (same category or theme)
@@ -842,3 +1227,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 window.gamesData = gamesData; 
+window.getPopularGames = getPopularGames; 

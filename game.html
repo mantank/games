@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>游戏 - Happy Games</title>
-    <meta name="description" content="玩免费在线游戏">
+    <title>Game - Happy Games</title>
+    <meta name="description" content="Play free online games">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/game-page.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google AdSense 代码 -->
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1276532464726109" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
 
     <div class="container game-page-container">
         <div class="game-with-ads-layout">
-            <!-- 左侧广告 -->
+            <!-- Left Ad -->
             <div class="ad-container ad-left">
                 <div class="ad-unit">
                     <ins class="adsbygoogle"
@@ -34,16 +34,21 @@
                 </div>
             </div>
             
-            <!-- 游戏主内容 -->
+            <!-- Game Main Content -->
             <div class="game-content-wrapper">
                 <div class="game-header">
-                    <h1 class="game-title">游戏标题</h1>
+                    <!-- Back to Home Button -->
+                    <a href="index.html" class="back-to-home-btn">
+                        <i class="fas fa-home"></i> <span>Back to Home</span>
+                    </a>
+                    
+                    <h1 class="game-title">Game Title</h1>
                     <div class="game-actions">
                         <button class="favorite-btn" data-game-id="">
-                            <i class="fas fa-heart"></i> <span data-i18n="gameDetails.addToFavorites">添加到收藏</span>
+                            <i class="fas fa-heart"></i> <span data-i18n="gameDetails.addToFavorites">Add to Favorites</span>
                         </button>
                         <button class="fullscreen-btn" id="fullscreen-btn">
-                            <i class="fas fa-expand"></i> <span data-i18n="gameDetails.fullscreen">全屏</span>
+                            <i class="fas fa-expand"></i> <span data-i18n="gameDetails.fullscreen">Fullscreen</span>
                         </button>
                     </div>
                 </div>
@@ -91,16 +96,16 @@
                     </div>
                 </div>
                 
-                <!-- 相关游戏推荐 -->
+                <!-- Related Games -->
                 <div class="related-games">
-                    <h2 data-i18n="gameDetails.relatedGames">您可能也喜欢</h2>
+                    <h2 data-i18n="gameDetails.relatedGames">You May Also Like</h2>
                     <div class="games-grid" id="related-games">
-                        <!-- 相关游戏将在这里动态插入 -->
+                        <!-- Related games will be inserted here dynamically -->
                     </div>
                 </div>
             </div>
             
-            <!-- 右侧广告 -->
+            <!-- Right Ad -->
             <div class="ad-container ad-right">
                 <div class="ad-unit">
                     <ins class="adsbygoogle"

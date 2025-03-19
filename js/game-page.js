@@ -169,13 +169,13 @@ function loadRelatedGames(currentGame) {
     // 限制显示数量
     relatedGames = relatedGames.slice(0, 4);
     
-    // 渲染相关游戏
+    // Render related games
     relatedGamesContainer.innerHTML = '';
     relatedGames.forEach(game => {
         const gameCard = document.createElement('div');
         gameCard.className = 'game-card';
         gameCard.innerHTML = `
-            <a href="game.html?id=${game.id}" class="game-thumb-container">
+            <a href="game.html?id=${game.id}" target="_blank" rel="noopener noreferrer" class="game-thumb-container">
                 <img src="../${game.thumbnail}" alt="${game.title}" loading="lazy" class="game-thumb">
                 <div class="game-info-overlay">
                     <div class="game-title">${game.title}</div>
