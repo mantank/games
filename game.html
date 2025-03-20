@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="css/game-page.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Dynamic SEO tags will be set by JavaScript -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Happy Games">
+    <meta property="og:title" content="Play Free Online Games - Happy Games">
+    <meta property="og:description" content="Play free online games at Happy Games. Enjoy a wide selection of games including action, puzzle, racing, shooting and more!">
+    <meta property="og:image" content="https://happygame.help/images/og-image.jpg">
+    
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1276532464726109" crossorigin="anonymous"></script>
 </head>
@@ -37,6 +44,13 @@
             <!-- Game Main Content -->
             <div class="game-content-wrapper">
                 <div class="game-header">
+                    <!-- Breadcrumb Navigation -->
+                    <div class="breadcrumb-nav">
+                        <a href="index.html">Home</a> &gt;
+                        <span id="game-category-breadcrumb">Category</span> &gt;
+                        <span id="game-title-breadcrumb">Game</span>
+                    </div>
+                    
                     <!-- Back to Home Button -->
                     <a href="index.html" class="back-to-home-btn">
                         <i class="fas fa-home"></i> <span>Back to Home</span>
@@ -56,27 +70,27 @@
                 <div class="game-container" id="game-container">
                     <div class="game-loading" id="game-loading">
                         <div class="spinner"></div>
-                        <p data-i18n="gameDetails.loading">游戏加载中...</p>
+                        <p data-i18n="gameDetails.loading">Loading game...</p>
                     </div>
                     <div class="game-frame-container" id="game-frame-container">
-                        <!-- 游戏iframe将在这里动态插入 -->
+                        <!-- Game iframe will be dynamically inserted here -->
                     </div>
                 </div>
                 
                 <div class="game-info">
                     <div class="game-description">
-                        <h2 data-i18n="gameDetails.about">关于游戏</h2>
-                        <p id="game-description">游戏描述将在这里动态插入</p>
+                        <h2 data-i18n="gameDetails.about">About The Game</h2>
+                        <p id="game-description">Game description will be dynamically inserted here</p>
                     </div>
                     
                     <div class="game-metadata">
                         <div class="metadata-item">
-                            <span class="metadata-label" data-i18n="gameDetails.category">分类:</span>
-                            <span class="metadata-value" id="game-category">游戏分类</span>
+                            <span class="metadata-label" data-i18n="gameDetails.category">Category:</span>
+                            <span class="metadata-value" id="game-category">Game Category</span>
                         </div>
                         <div class="metadata-item">
-                            <span class="metadata-label" data-i18n="gameDetails.theme">主题:</span>
-                            <span class="metadata-value" id="game-theme">游戏主题</span>
+                            <span class="metadata-label" data-i18n="gameDetails.theme">Theme:</span>
+                            <span class="metadata-value" id="game-theme">Game Theme</span>
                         </div>
                     </div>
                 </div>
@@ -93,6 +107,37 @@
                         <script>
                              (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
+                    </div>
+                </div>
+                
+                <!-- Game Instructions and Controls -->
+                <div class="game-instructions">
+                    <div class="instruction-section">
+                        <h2>How to Play</h2>
+                        <p id="game-how-to-play">Welcome to this game! Detailed instructions will appear here based on the game type and features. Explore the controls below to get started.</p>
+                    </div>
+                    
+                    <div class="instruction-section">
+                        <h2>Game Controls</h2>
+                        <div id="game-controls">
+                            <ul class="controls-list">
+                                <li><span class="control-key">WASD</span> <span class="control-action">or Arrow Keys - Movement</span></li>
+                                <li><span class="control-key">Space</span> <span class="control-action">- Jump/Action</span></li>
+                                <li><span class="control-key">Mouse</span> <span class="control-action">- Aim/Interact</span></li>
+                                <li><span class="control-key">E</span> <span class="control-action">- Interact with objects</span></li>
+                                <li><span class="control-key">P</span> <span class="control-action">- Pause game</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="instruction-section">
+                        <h2>Game Tips</h2>
+                        <ul id="game-tips">
+                            <li>Take your time to explore the game environment.</li>
+                            <li>Collect power-ups to increase your abilities.</li>
+                            <li>Watch out for obstacles and enemies.</li>
+                            <li>Try different strategies if you get stuck.</li>
+                        </ul>
                     </div>
                 </div>
                 
@@ -130,5 +175,8 @@
     <script src="js/favorites.js"></script>
     <script src="script.js"></script>
     <script src="js/game-page.js"></script>
+    <script src="js/vertical-game-responsive.js"></script>
+    <script src="js/game-instructions.js"></script>
+    <script src="js/sitemap-generator.js"></script>
 </body>
 </html> 

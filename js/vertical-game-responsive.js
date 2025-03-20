@@ -21,7 +21,7 @@ function initVerticalGameResponsive() {
             const game = e.detail.game;
             if (game && game.isVertical) {
                 console.log('[Vertical Game] 检测到垂直游戏，应用响应式布局');
-                const container = document.getElementById('game-iframe-container');
+                const container = document.getElementById('game-frame-container');
                 if (container) {
                     // 调整容器尺寸
                     adjustVerticalGameSize(container);
@@ -43,7 +43,7 @@ function initVerticalGameResponsive() {
  * 检查并调整页面中已存在的垂直游戏容器
  */
 function checkAndAdjustExistingVerticalGames() {
-    const verticalContainers = document.querySelectorAll('.vertical-game-iframe-container');
+    const verticalContainers = document.querySelectorAll('.vertical-game');
     if (verticalContainers.length > 0) {
         console.log(`[Vertical Game] 找到 ${verticalContainers.length} 个垂直游戏容器`);
         verticalContainers.forEach(function(container) {
@@ -72,7 +72,7 @@ function adjustVerticalGameSize(container) {
     const viewportWidth = window.innerWidth;
     
     // 获取游戏详情容器的顶部位置
-    const gameDetailsContainer = document.querySelector('.game-details-container');
+    const gameDetailsContainer = document.querySelector('.game-content-wrapper');
     const containerTop = gameDetailsContainer ? gameDetailsContainer.getBoundingClientRect().top : 0;
     const availableHeight = viewportHeight - containerTop - 50; // 减去一些底部间距
     

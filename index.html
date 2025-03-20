@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,26 @@
     <title>Happy Games - Cyberpunk Gaming Portal | Play Free Online Games</title>
     <meta name="description" content="Experience the ultimate cyberpunk gaming experience with Happy Games. Play free online games including action, puzzle, strategy, adventure, and more.">
     <link rel="canonical" href="https://happygame.help/">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://happygame.help/">
+    <meta property="og:title" content="Happy Games - Play Free Online Games">
+    <meta property="og:description" content="Experience the ultimate gaming experience with Happy Games. Play hundreds of free online games including action, puzzle, strategy, adventure, and more.">
+    <meta property="og:image" content="https://happygame.help/images/og-image.jpg">
+    <meta property="og:site_name" content="Happy Games">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Happy Games - Play Free Online Games">
+    <meta name="twitter:description" content="Play hundreds of free online games instantly. No downloads required!">
+    <meta name="twitter:image" content="https://happygame.help/images/twitter-card.jpg">
+    
+    <!-- Other SEO Tags -->
+    <meta name="keywords" content="online games, free games, browser games, puzzle games, action games, racing games, casual games, shooting games">
+    <meta name="author" content="Happy Games">
+    <meta name="robots" content="index, follow">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -195,22 +215,12 @@
     </div>
 
     <script src="js/games-data.js"></script>
-    <script>
-        // 确保所有必要的函数都在全局作用域和window对象上可用
-        window.getGamesByCategory = getGamesByCategory;
-        window.getGamesByTheme = getGamesByTheme;
-        window.getGameById = getGameById;
-        window.gamesData = gamesData;
-        console.log('[DEBUG] 游戏数据加载状态:', {
-            gamesDataLength: gamesData.length,
-            getGamesByCategoryAvailable: typeof getGamesByCategory === 'function',
-            getGamesByThemeAvailable: typeof getGamesByTheme === 'function'
-        });
-    </script>
     <script src="js/favorites.js"></script>
     <script src="js/homepage-generator.js"></script>
+    <script src="js/site-search.js"></script>
     <script src="script.js"></script>
     <script src="js/waterfall-grid.js"></script>
+    <script src="js/sitemap-generator.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             console.log('[DEBUG] DOMContentLoaded 触发，检查分类状态:');

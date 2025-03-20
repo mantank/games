@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Sitemap: https://happygame.help/sitemap.xml
+
+# Disallow admin sections
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /temp/
+
+# Allow Google Images to index images
+User-agent: Googlebot-Image
+Allow: /games/
+Allow: /images/
+
+# Prevent duplicate content in search results
+Disallow: /*?*id=
+Allow: /game.html?id= 
