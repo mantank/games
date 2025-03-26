@@ -174,6 +174,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Add new game data
+    window.gamesData = window.gamesData || [];
+    window.gamesData.push({
+        id: 'global-guesser',
+        title: 'Global Guesser',
+        thumbnail: 'games/global-guesser-512-lg.jpg',
+        url: 'https://unblocked-games.s3.amazonaws.com/games/2025/html/global-guesser/index.html#/',
+        category: ['puzzle', 'casual'],
+        description: 'Test your geography knowledge in this exciting location guessing game! Explore the world and guess where you are based on street views and landmarks.',
+        controls: 'Use mouse to look around, click on the map to make your guess, the closer your guess, the more points you earn',
+        tags: ['#games', '#geography', '#quiz', '#world', '#maps', '#exploration', '#educational', '#guessing']
+    });
 });
 
 // 设置侧边栏分类链接的点击事件
@@ -494,26 +507,6 @@ function performSearch() {
         }
     }
 }
-
-// 添加搜索按钮和输入框的事件监听
-document.addEventListener('DOMContentLoaded', function() {
-    // ... 现有代码 ...
-    
-    // 添加搜索功能
-    const searchBtn = document.getElementById('search-btn');
-    const searchInput = document.getElementById('game-search');
-    
-    if (searchBtn && searchInput) {
-        searchBtn.addEventListener('click', performSearch);
-        searchInput.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
-        });
-    }
-    
-    // ... 现有代码 ...
-});
 
 window.addEventListener('error', function(e) {
     console.error('JavaScript错误:', e.message);
