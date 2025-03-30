@@ -359,15 +359,38 @@ function createGameCard(game) {
             console.error(`游戏 ${game.id} 检查失败:`, error);
         });
     
-    card.innerHTML = `
-        <a href="game.html?id=${game.id}" target="_blank" rel="noopener noreferrer" class="game-thumb-container">
-            <img src="${game.thumbnail}" alt="${game.title}" loading="lazy" class="game-thumb">
-            <div class="game-info-overlay">
-                <div class="game-title">${game.title}</div>
-                <div class="game-category">${(game.category || []).join(', ')}</div>
-            </div>
-        </a>
+    const gameLink = document.createElement('a');
+    gameLink.href = `game.html?id=${game.id}`;
+    gameLink.target = "_blank";
+    gameLink.rel = "noopener noreferrer";
+    gameLink.className = "game-thumb-container";
+    
+    const img = document.createElement('img');
+    img.src = game.thumbnail;
+    img.alt = game.title;
+    img.loading = "lazy";
+    img.className = "game-thumb";
+    
+    // 添加图片错误处理
+    img.onerror = function() {
+        console.error(`缩略图加载失败: ${game.thumbnail}`);
+        // 替换为默认图片
+        this.src = 'images/default-game-thumb.jpg';
+        // 显示加载错误指示器
+        errorMessage.textContent = '缩略图加载失败';
+        errorMessage.style.display = 'block';
+    };
+    
+    const infoOverlay = document.createElement('div');
+    infoOverlay.className = "game-info-overlay";
+    infoOverlay.innerHTML = `
+        <div class="game-title">${game.title}</div>
+        <div class="game-category">${(game.category || []).join(', ')}</div>
     `;
+    
+    gameLink.appendChild(img);
+    gameLink.appendChild(infoOverlay);
+    card.appendChild(gameLink);
     
     return card;
 }

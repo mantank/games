@@ -76,6 +76,11 @@ function initWaterfallGrid(containerId, dataProvider) {
     window.addEventListener('resize', debounce(() => {
         // Recalculate layout if needed
     }, 200));
+    
+    // 延迟执行，确保所有图片元素都已创建
+    setTimeout(() => {
+        setupAllThumbnailErrorHandling();
+    }, 100);
 }
 
 /**
@@ -673,11 +678,58 @@ function getPopularWaterfallGames() {
     return popularGames;
 }
 
+/**
+ * 处理图片加载错误
+ * @param {HTMLImageElement} img - 图片元素
+ */
+function handleThumbnailError(img) {
+    if (!img) return;
+    
+    console.error(`瀑布流缩略图加载失败: ${img.src}`);
+    // 替换为默认图片
+    img.src = 'images/default-game-thumb.jpg';
+    // 如果已在子目录中
+    if (window.location.pathname.includes('/category/') || 
+        window.location.pathname.includes('/theme/')) {
+        img.src = '../images/default-game-thumb.jpg';
+    }
+}
+
+/**
+ * 为瀑布流中的所有图片添加错误处理
+ */
+function setupAllThumbnailErrorHandling() {
+    // 查找所有游戏缩略图
+    document.querySelectorAll('.waterfall-item img').forEach(img => {
+        if (!img.hasAttribute('data-error-handled')) {
+            img.setAttribute('data-error-handled', 'true');
+            img.onerror = function() {
+                handleThumbnailError(this);
+            };
+        }
+    });
+}
+
 // Export functions for use in other scripts
 window.WaterfallGrid = {
     init: initWaterfallGrid,
     loadGames: loadGames,
     getWaterfallGames: getWaterfallGames,
     getPopularWaterfallGames: getPopularWaterfallGames,
-    openShareModal: openShareModal
-}; 
+    openShareModal: openShareModal,
+    handleThumbnailError: handleThumbnailError,
+    setupAllThumbnailErrorHandling: setupAllThumbnailErrorHandling
+};
+
+// 在瀑布流初始化后设置图片错误处理
+document.addEventListener('DOMContentLoaded', function() {
+    // 确保WaterfallGrid对象存在
+    if (window.WaterfallGrid) {
+        // 初始化后立即处理所有缩略图
+        setTimeout(() => {
+            if (typeof window.WaterfallGrid.setupAllThumbnailErrorHandling === 'function') {
+                window.WaterfallGrid.setupAllThumbnailErrorHandling();
+            }
+        }, 500);
+    }
+}); 

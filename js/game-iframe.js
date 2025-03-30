@@ -438,6 +438,41 @@ function setupIframeMessageHandler(iframeWindow, messageHandler) {
     };
 }
 
+/**
+ * 添加缩略图错误处理函数
+ * 确保游戏详情页面的缩略图也有错误处理
+ */
+function setupThumbnailErrorHandling() {
+    // 查找所有游戏缩略图
+    document.querySelectorAll('.game-thumb').forEach(img => {
+        if (!img.hasAttribute('data-error-handled')) {
+            img.setAttribute('data-error-handled', 'true');
+            img.onerror = function() {
+                console.error(`缩略图加载失败: ${img.src}`);
+                // 替换为默认图片
+                this.src = '../images/default-game-thumb.jpg';
+                // 如果在根目录
+                if (this.src.indexOf('../') === 0 && this.src.indexOf('../images/default-game-thumb.jpg') === 0) {
+                    this.src = 'images/default-game-thumb.jpg';
+                }
+            };
+        }
+    });
+}
+
+// 在DOMContentLoaded时执行
+document.addEventListener('DOMContentLoaded', function() {
+    setupThumbnailErrorHandling();
+    
+    // 在动态加载内容后也执行
+    const observer = new MutationObserver(function(mutations) {
+        setupThumbnailErrorHandling();
+    });
+    
+    // 观察文档变化
+    observer.observe(document.body, { childList: true, subtree: true });
+});
+
 // Export functions for use in other scripts
 window.GameIframeManager = {
     loadGameIframe,
